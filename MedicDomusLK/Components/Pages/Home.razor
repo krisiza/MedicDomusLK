@@ -14,7 +14,7 @@
     img{
         display:block;
         width:100%;
-        height:auto;
+        height:100%;
     }
 
     .home-page-container > *{
@@ -33,13 +33,18 @@
         width:100%;
     }
 
+    .photo-container{
+        height: 100%;
+    }
+
     h1
     {
         font-size:2.5em;
+        color:white;
     }
 
     h2{
-        font-size: 2em;
+        font-size: 4.5em;
     }
 
     .header-text{
@@ -63,11 +68,60 @@
                 justify-content:center;
         }
 
-        a{
+    .home-page-container a {
             text-decoration:none;
             color: white;
             font-weight:bold;
+            border: 2px solid white;
+            padding: 0.8em 2em;
+            border-radius: 3em;
+            background-color: transparent;
         }
+
+        .home-page-container a:hover {
+            color: white;
+            font-size: 1.1em;
+        }
+
+    .buttons-container{
+        padding: 5em;
+        display: flex;
+        justify-content: center;
+        gap: 2em;
+    }
+
+    .buttons-container > button {
+        padding: 0.8em 2em;
+            background-color: #4d73db;
+            border: 2px solid white;
+            border-radius: 3em;
+            color:white;
+    }
+
+        .buttons-container > button:hover{
+                box-shadow: 22px 5px 10px #b8d2e0;
+        }
+
+    .location{
+        height: 30em;
+        display: flex;
+    }
+
+    .location-text{
+        flex-grow: 4; 
+    }
+
+
+    footer{
+        text-align:center;
+        background-color: #4d73db;
+        color:white;
+    }
+
+    footer >  p{
+        font-weight:bold;
+        padding: 1em;
+    }
 </style>
 
 <PageTitle>Home</PageTitle>
@@ -97,6 +151,14 @@
             <button>Daten verändern</button>
         </div>
     </main>
+    <div class="location">
+        <div class="location-img">
+            <img src="/location.gif"/>
+        </div>
+        <div class="location-text">
+            <img src="/blue-sky.png" />
+        </div>
+    </div>
     <footer>
         <p>Copyright @DateTime.Now.Year MedicDumus. All Rights Reserved</p>
     </footer>
