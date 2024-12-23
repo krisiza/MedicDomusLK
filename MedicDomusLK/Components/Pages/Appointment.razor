@@ -3,46 +3,66 @@
 
 <PageTitle>Appointment</PageTitle>
 
-<h2>Terminbuchung</h2>
-
-<form method="post">
-    <div>
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required />
+<div class="app-container">
+    <div class="img-container">
+        <img src="/logo-id.jpg"/>
     </div>
 
-    <div>
-        <label for="vorname">Vorname:</label>
-        <input type="text" id="vorname" name="vorname" required />
-    </div>
+    <form method="post">
+        <div>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required />
+        </div>
 
-    <div>
-        <label for="strasse">Straße und Nr.:</label>
-        <input type="text" id="strasse" name="strasse" required />
-    </div>
+        <div>
+            <label for="vorname">Vorname:</label>
+            <input type="text" id="vorname" name="vorname" required />
+        </div>
 
-    <div>
-        <label for="ort">Ort:</label>
-        <input type="text" id="ort" name="ort" required />
-    </div>
+        <div>
+            <label for="strasse">Straße und Nr.:</label>
+            <input type="text" id="strasse" name="strasse" required />
+        </div>
 
-    <div>
-        <label for="plz">PLZ:</label>
-        <input type="text" id="plz" name="plz" pattern="[0-9]{5}" title="Bitte eine gültige 5-stellige PLZ eingeben" required />
-    </div>
+        <div>
+            <label for="ort">Ort:</label>
+            <input type="text" id="ort" name="ort" required />
+        </div>
 
-    <button type="submit">Termin buchen</button>
-</form>
+        <div>
+            <label for="plz">PLZ:</label>
+            <input type="text" id="plz" name="plz" pattern="[0-9]{5}" title="Bitte eine gültige 5-stellige PLZ eingeben" required />
+        </div>
+
+        <button type="submit">Termin buchen</button>
+    </form>
+</div>
+
 
 <style>
+    .app-container{
+        display:flex;
+        justify-content:center;
+        margin-top:100px;
+    }
+
+    img{
+        display:block;
+        width:100%;
+        height: auto;
+    }
+
+    .img-container{
+        width:35em;
+    }
+
     form {
-        max-width: 400px;
-        margin: 20px auto;
-        padding: 15px;
-        border: 1px solid #ccc;
+        width: 35em;
+        padding: 3em;
+        font-family: Arial, sans-serif;
         border-radius: 8px;
         box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-        font-family: Arial, sans-serif;
+        border: 1px solid #ccc;
     }
 
     label {
