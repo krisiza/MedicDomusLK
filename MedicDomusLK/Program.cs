@@ -1,6 +1,7 @@
 using MedicDomusLK.Components;
 using MedicDomusLK.Components.Account;
 using MedicDomusLK.Data;
+using MedicDomusLK.Data.Models;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;

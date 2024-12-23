@@ -1,4 +1,4 @@
-using MedicDomusLK.Data;
+using MedicDomusLK.Data.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 

@@ -1,6 +1,6 @@
 using MedicDomusLK.Components.Account.Pages;
 using MedicDomusLK.Components.Account.Pages.Manage;
-using MedicDomusLK.Data;
+using MedicDomusLK.Data.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Http.Extensions;
