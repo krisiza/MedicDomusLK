@@ -66,6 +66,7 @@
     border-top-left-radius: 2em;
     border-bottom-left-radius: 2em;
     height: 100%;
+    overflow:scroll;
 }
 
 .form-control {

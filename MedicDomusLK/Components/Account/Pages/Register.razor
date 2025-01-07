@@ -1,12 +1,11 @@
 ﻿@page "/Account/Register"
-
-@    using System.ComponentModel.DataAnnotations
-@    using System.Text
-@    using System.Text.Encodings.Web
-@    using Microsoft.AspNetCore.Identity
-@    using Microsoft.AspNetCore.WebUtilities
-@    using MedicDomusLK.Data;
-    using MedicDomusLK.Data.Models
+@using System.ComponentModel.DataAnnotations
+@using System.Text
+@using System.Text.Encodings.Web
+@using MedicDomusLK.Data.Models
+@using MedicDomusLK.Data.Models.Enums
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.WebUtilities
 
 @inject UserManager<ApplicationUser> UserManager
 @inject IUserStore<ApplicationUser> UserStore
@@ -20,7 +19,7 @@
 
 <link rel="stylesheet" href="Styles/identityStyle.css">
 
-<div class="row">
+<div class="row" style="length:fit-content;">
     <section class="main-login-container">
         <StatusMessage Message="@Message" />
         <div class="text-container">
@@ -52,6 +51,48 @@
                     <label for="confirm-password">Confirm Password</label>
                     <ValidationMessage For="() => Input.ConfirmPassword" class="text-danger" />
                 </div>
+                <div class="form-floating mb-3">
+                    <InputText @bind-Value="Input.Firstname" class="form-control" autocomplete="firstname" aria-required="true" placeholder="Firstname" />
+                    <label for="firstname">Firstname</label>
+                    <ValidationMessage For="() => Input.Firstname" class="text-danger" />
+                </div>
+                <div class="form-floating mb-3">
+                    <InputText @bind-Value="Input.Lastname" class="form-control" autocomplete="lastname" aria-required="true" placeholder="Lastname" />
+                    <label for="lastname">Lastname</label>
+                    <ValidationMessage For="() => Input.Lastname" class="text-danger" />
+                </div>
+                <div class="form-floating mb-3">
+                    <InputDate @bind-Value="Input.Birthdate" class="form-control" autocomplete="bday" aria-required="true" />
+                    <label for="birthdate">Birthdate</label>
+                    <ValidationMessage For="() => Input.Birthdate" class="text-danger" />
+                </div>
+                <div class="form-floating mb-3">
+                    <InputSelect @bind-Value="Input.Gender" class="form-control">
+                        <option value="">Select Gender</option>
+                        @foreach (Gender gender in Enum.GetValues(typeof(Gender)))
+                        {
+                            <option value="@((int)gender)">@gender</option>
+                        }
+                    </InputSelect>
+                    <label for="gender">Gender</label>
+                    <ValidationMessage For="() => Input.Gender" class="text-danger" />
+                </div>
+                <div class="form-floating mb-3">
+                    <InputSelect @bind-Value="Input.TownId" class="form-control">
+                        <option value="">Select Gender</option>
+                        @foreach (Town town in Towns)
+                        {
+                            <option value="@town.Id">@town.Name</option>
+                        }
+                    </InputSelect>
+                    <label for="town">Town</label>
+                    <ValidationMessage For="() => Input.TownId" class="text-danger" />
+                </div>
+                <div class="form-floating mb-3">
+                    <InputText @bind-Value="Input.Street" class="form-control" autocomplete="street" aria-required="true" placeholder="Street" />
+                    <label for="street">Street</label>
+                    <ValidationMessage For="() => Input.Street" class="text-danger" />
+                </div>
                 <button type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
             </EditForm>
         </div>
@@ -69,13 +110,55 @@
 
     private string? Message => identityErrors is null ? null : $"Error: {string.Join(", ", identityErrors.Select(error => error.Description))}";
 
+    private IEnumerable<Town> Towns { get; set; } = Enumerable.Empty<Town>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Towns = new List<Town>()
+        {
+            new Town { Id = 1, PLZ = "93047", Name = "Regensburg" },
+               new Town { Id = 2, PLZ = "92318", Name = "Neumarkt in der Oberpfalz" },
+               new Town { Id = 3, PLZ = "92224", Name = "Amberg" },
+               new Town { Id = 4, PLZ = "92237", Name = "Sulzbach-Rosenberg" },
+               new Town { Id = 5, PLZ = "92703", Name = "Leuchtenberg" },
+               new Town { Id = 6, PLZ = "93059", Name = "Regensburg-West" },
+               new Town { Id = 7, PLZ = "92334", Name = "Berching" },
+               new Town { Id = 8, PLZ = "92421", Name = "Schwandorf" },
+               new Town { Id = 9, PLZ = "92339", Name = "Beilngries" },
+               new Town { Id = 10, PLZ = "92271", Name = "Hirschau" },
+               new Town { Id = 11, PLZ = "92271", Name = "Freudenberg" },
+               new Town { Id = 12, PLZ = "92353", Name = "Postbauer-Heng" },
+               new Town { Id = 13, PLZ = "92718", Name = "Vohenstrauß" },
+               new Town { Id = 14, PLZ = "93073", Name = "Wenzenbach" },
+               new Town { Id = 15, PLZ = "92442", Name = "Oberviechtach" },
+               new Town { Id = 16, PLZ = "93413", Name = "Cham" },
+               new Town { Id = 17, PLZ = "93444", Name = "Bad Kötzting" },
+               new Town { Id = 18, PLZ = "92266", Name = "Ensdorf" },
+               new Town { Id = 19, PLZ = "92431", Name = "Neunburg vorm Wald" },
+               new Town { Id = 20, PLZ = "93092", Name = "Barbing" },
+               new Town { Id = 21, PLZ = "92699", Name = "Wiesau" },
+               new Town { Id = 22, PLZ = "92439", Name = "Bodenwöhr" }
+        };
+
+    }
+
     public async Task RegisterUser(EditContext editContext)
     {
+
+        Console.WriteLine($"Selected TownId: {Input.TownId}");  
         var user = CreateUser();
+
+        user.Firstname = Input.Firstname;
+        user.Lastname = Input.Lastname;
+        user.Birthdate = Input.Birthdate;
+        user.Gender = Input.Gender;
+        user.TownId = int.Parse(Input.TownId); 
+        user.Street = Input.Street;
 
         await UserStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
         var emailStore = GetEmailStore();
         await emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
+
         var result = await UserManager.CreateAsync(user, Input.Password);
 
         if (!result.Succeeded)
@@ -145,5 +228,32 @@
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; } = "";
+
+        [Required]
+        [StringLength(50, ErrorMessage = "Firstname must be at most {1} characters long.")]
+        [Display(Name = "First Name")]
+        public string Firstname { get; set; } = "";
+
+        [Required]
+        [StringLength(50, ErrorMessage = "Lastname must be at most {1} characters long.")]
+        [Display(Name = "Last Name")]
+        public string Lastname { get; set; } = "";
+
+        [Required]
+        [DataType(DataType.Date)]
+        [Display(Name = "Birthdate")]
+        public DateTime Birthdate { get; set; }
+
+        [Display(Name = "Gender")]
+        public Gender? Gender { get; set; }
+
+        [Required]
+        [Display(Name = "Town")]
+        public string TownId { get; set; }
+
+        [Required]
+        [StringLength(100, ErrorMessage = "Street must be at most {1} characters long.")]
+        [Display(Name = "Street Address")]
+        public string Street { get; set; } = "";
     }
 }
