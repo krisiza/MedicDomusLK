@@ -1,0 +1,77 @@
+﻿@page "/profile"
+@using MedicDomusLK.Data.Models
+@using MedicDomusLK.Data.Models.Enums
+@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Identity
+@rendermode InteractiveServer
+
+<PageTitle>Profile</PageTitle>
+
+@if (ApplicationUser != null)
+{
+    <div class="container mt-5">
+        <div class="card shadow-lg">
+            <div class="card-header text-white bg-primary">
+                <h2>Benutzerprofil</h2>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    @if(ApplicationUser.Gender == Gender.Female)
+                    {
+                        <div class="col-md-4 text-center">
+                            <img src="https://img.freepik.com/premium-vector/vector-flat-illustration-grayscale-avatar-user-profile-person-icon-profile-picture-suitable-social-media-profiles-icons-screensavers-as-templatex9xa_719432-1040.jpg" 
+                                alt="Profilbild" class="img-thumbnail rounded-circle mb-3" />
+                            <h4>@ApplicationUser.Firstname @ApplicationUser.Lastname</h4>
+                        </div>
+                    }
+                    else if (ApplicationUser.Gender == Gender.Male)
+                    {
+                        <div class="col-md-4 text-center">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Circle-icons-profile.svg/2048px-Circle-icons-profile.svg.png"
+                                 alt="Profilbild" class="img-thumbnail rounded-circle mb-3" />
+                            <h4>@ApplicationUser.Firstname @ApplicationUser.Lastname</h4>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-md-4 text-center">
+                            <img src="https://cdn.prod.website-files.com/6008334066c47b590965694d/6053402382662c812113f2c9_blank-profile-picture-973460_640.png"
+                                 alt="Profilbild" class="img-thumbnail rounded-circle mb-3" />
+                            <h4>@ApplicationUser.Firstname @ApplicationUser.Lastname</h4>
+                        </div>
+                    }
+                    <div class="col-md-8">
+                        <h5 class="text-secondary">Persönliche Daten</h5>
+                        <hr />
+                        <dl class="row">
+                            <dt class="col-sm-4">Vorname</dt>
+                            <dd class="col-sm-8">@ApplicationUser.Firstname</dd>
+
+                            <dt class="col-sm-4">Nachname</dt>
+                            <dd class="col-sm-8">@ApplicationUser.Lastname</dd>
+
+                            <dt class="col-sm-4">Geburtsdatum</dt>
+                            <dd class="col-sm-8">@ApplicationUser.Birthdate</dd>
+
+                            <dt class="col-sm-4">Geschlecht</dt>
+                            <dd class="col-sm-8">@ApplicationUser.Gender?.ToString()</dd>
+
+                            <dt class="col-sm-4">Stadt</dt>
+                            <dd class="col-sm-8">@ApplicationUser.PostCode @ApplicationUser.Town</dd>
+
+                            <dt class="col-sm-4">Straße</dt>
+                            <dd class="col-sm-8">@ApplicationUser.Street</dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .container {
+            max-width: 800px;
+        }
+    </style>
+}
+

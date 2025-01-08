@@ -2,6 +2,10 @@ using MedicDomusLK.Components;
 using MedicDomusLK.Components.Account;
 using MedicDomusLK.Data;
 using MedicDomusLK.Data.Models;
+using MedicDomusLK.Repositories;
+using MedicDomusLK.Repositories.Contracts;
+using MedicDomusLK.Services;
+using MedicDomusLK.Services.Contracts;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -42,6 +46,12 @@ namespace MedicDomusLK
                 .AddDefaultTokenProviders();
 
             builder.Services.AddSingleton<IEmailSender<ApplicationUser>, IdentityNoOpEmailSender>();
+            builder.Services.AddScoped<IRepository<ApplicationUser, string>, BaseRepository<ApplicationUser, string>>();
+            builder.Services.AddScoped<IRepository<Town, int>, BaseRepository<Town, int>>();
+            builder.Services.AddScoped<IRepository<Service, int>, BaseRepository<Service, int>>();
+            builder.Services.AddScoped<IApplicationUserService, ApplicationUserService>();
+            builder.Services.AddScoped<IServiceService, ServiceService>();
+            builder.Services.AddScoped<ITownService, TownService>();
 
             var app = builder.Build();
 
