@@ -74,7 +74,20 @@ h2 {
         justify-content: center;
     }
 
-.home-page-container a {
+.buttons-container > .button {
+    padding: 0.8em 2em;
+    background-color: #4d73db;
+    border: 2px solid white;
+    border-radius: 3em;
+    color: white;
+    text-decoration: none;
+}
+
+    .buttons-container > .button:hover {
+        box-shadow: 22px 5px 10px #b8d2e0;
+    }
+
+.info-container > .first {
     text-decoration: none;
     color: white;
     font-weight: bold;
@@ -84,10 +97,10 @@ h2 {
     background-color: transparent;
 }
 
-    .home-page-container a:hover {
-        color: white;
-        font-size: 1.1em;
-    }
+.home-page-container > .first:hover {
+    color: white;
+    font-size: 1.1em;
+}
 
 .buttons-container {
     padding: 5em;
@@ -96,17 +109,6 @@ h2 {
     gap: 2em;
 }
 
-    .buttons-container > button {
-        padding: 0.8em 2em;
-        background-color: #4d73db;
-        border: 2px solid white;
-        border-radius: 3em;
-        color: white;
-    }
-
-        .buttons-container > button:hover {
-            box-shadow: 22px 5px 10px #b8d2e0;
-        }
 
 .location {
     height: 30em;
