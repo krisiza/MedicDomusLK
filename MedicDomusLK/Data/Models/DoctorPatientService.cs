@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MedicDomusLK.Data.Models
 {
-    [PrimaryKey(nameof(DoctorId), nameof(PatientId), nameof(ServiceId))]
+    [PrimaryKey(nameof(DoctorId), nameof(PatientId), nameof(ServiceId), nameof(Date))]
     public class DoctorPatientService
     {
         public string DoctorId { get; set; }
@@ -20,5 +20,7 @@ namespace MedicDomusLK.Data.Models
 
         [ForeignKey(nameof(ServiceId))]
         public Service Service { get; set; }
+
+        public DateTime Date { get; set; }
     }
 }

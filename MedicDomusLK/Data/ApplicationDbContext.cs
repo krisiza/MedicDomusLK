@@ -1,16 +1,17 @@
 using MedicDomusLK.Data.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace MedicDomusLK.Data
 {
-    public class ApplicationDbContext: IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext
     {
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-            : base(options) 
+            : base(options)
         {
-            
+
         }
 
         public DbSet<Service> Services { get; set; }
@@ -19,10 +20,32 @@ namespace MedicDomusLK.Data
 
         public DbSet<ApplicationUser> Users { get; set; }
 
+        public DbSet<DoctorPatientService> DoctorPatientServices { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<DoctorPatientService>().HasKey(dps => new { dps.DoctorId, dps.PatientId, dps.ServiceId, dps.Date });
+
+            modelBuilder.Entity<DoctorPatientService>()
+                .HasOne(dps => dps.Doctor)
+                .WithMany()
+                .HasForeignKey(dps => dps.DoctorId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<DoctorPatientService>()
+                 .HasOne(dps => dps.Patient)
+                .WithMany()
+                .HasForeignKey(dps => dps.PatientId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<DoctorPatientService>()
+                .HasOne(dps => dps.Service)
+                .WithMany()
+                .HasForeignKey(dps => dps.ServiceId)
+                .OnDelete(DeleteBehavior.NoAction);
+
 
             modelBuilder.Entity<Town>().HasData(
                new Town { Id = 1, PLZ = "93047", Name = "Regensburg" },
@@ -48,6 +71,117 @@ namespace MedicDomusLK.Data
                new Town { Id = 21, PLZ = "92699", Name = "Wiesau" },
                new Town { Id = 22, PLZ = "92439", Name = "Bodenwöhr" }
            );
+
+            modelBuilder.Entity<Service>().HasData(
+            new Service { Id = 1, Name = "General Consultation", Price = 50.00M },
+            new Service { Id = 2, Name = "Pediatric Check-Up", Price = 60.00M },
+            new Service { Id = 3, Name = "Vaccination", Price = 30.00M },
+            new Service { Id = 4, Name = "Blood Test", Price = 45.00M },
+            new Service { Id = 5, Name = "Physical Therapy Session", Price = 70.00M },
+            new Service { Id = 6, Name = "Specialist Consultation", Price = 100.00M }
+            );
+
+
+            var doctorRoleId = Guid.NewGuid().ToString();
+            modelBuilder.Entity<IdentityRole>().HasData(
+                new IdentityRole
+                {
+                    Id = doctorRoleId,
+                    Name = "Doctor",
+                    NormalizedName = "DOCTOR"
+                }
+            );
+
+            var passwordHasher = new PasswordHasher<ApplicationUser>();
+            var users = new List<ApplicationUser>
+            {
+                new ApplicationUser
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    UserName = "doctor1@example.com",
+                    NormalizedUserName = "DOCTOR1@EXAMPLE.COM",
+                    Email = "doctor1@example.com",
+                    NormalizedEmail = "DOCTOR1@EXAMPLE.COM",
+                    EmailConfirmed = true,
+                    Firstname = "John",
+                    Lastname = "Doe",
+                    Birthdate = new DateTime(1980, 1, 1),
+                    Street = "123 Elm Street",
+                    TownId = 1,
+                    PasswordHash = passwordHasher.HashPassword(null, "Password123!")
+                },
+                new ApplicationUser
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    UserName = "doctor2@example.com",
+                    NormalizedUserName = "DOCTOR2@EXAMPLE.COM",
+                    Email = "doctor2@example.com",
+                    NormalizedEmail = "DOCTOR2@EXAMPLE.COM",
+                    EmailConfirmed = true,
+                    Firstname = "Jane",
+                    Lastname = "Smith",
+                    Birthdate = new DateTime(1985, 2, 15),
+                    Street = "456 Oak Avenue",
+                    TownId = 2,
+                    PasswordHash = passwordHasher.HashPassword(null, "Password123!")
+                },
+                new ApplicationUser
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    UserName = "doctor3@example.com",
+                    NormalizedUserName = "DOCTOR3@EXAMPLE.COM",
+                    Email = "doctor3@example.com",
+                    NormalizedEmail = "DOCTOR3@EXAMPLE.COM",
+                    EmailConfirmed = true,
+                    Firstname = "Emily",
+                    Lastname = "Johnson",
+                    Birthdate = new DateTime(1990, 3, 30),
+                    Street = "789 Pine Lane",
+                    TownId = 3,
+                    PasswordHash = passwordHasher.HashPassword(null, "Password123!")
+                },
+                new ApplicationUser
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    UserName = "doctor4@example.com",
+                    NormalizedUserName = "DOCTOR4@EXAMPLE.COM",
+                    Email = "doctor4@example.com",
+                    NormalizedEmail = "DOCTOR4@EXAMPLE.COM",
+                    EmailConfirmed = true,
+                    Firstname = "Michael",
+                    Lastname = "Brown",
+                    Birthdate = new DateTime(1975, 4, 10),
+                    Street = "321 Maple Court",
+                    TownId = 4,
+                    PasswordHash = passwordHasher.HashPassword(null, "Password123!")
+                },
+                new ApplicationUser
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    UserName = "doctor5@example.com",
+                    NormalizedUserName = "DOCTOR5@EXAMPLE.COM",
+                    Email = "doctor5@example.com",
+                    NormalizedEmail = "DOCTOR5@EXAMPLE.COM",
+                    EmailConfirmed = true,
+                    Firstname = "Sarah",
+                    Lastname = "Davis",
+                    Birthdate = new DateTime(1983, 5, 25),
+                    Street = "654 Birch Blvd",
+                    TownId = 5,
+                    PasswordHash = passwordHasher.HashPassword(null, "Password123!")
+                }
+            };
+
+            modelBuilder.Entity<ApplicationUser>().HasData(users);
+
+            var userRoles = users.Select(user => new IdentityUserRole<string>
+            {
+                UserId = user.Id,
+                RoleId = doctorRoleId
+            }).ToList();
+
+            modelBuilder.Entity<IdentityUserRole<string>>().HasData(userRoles);
         }
     }
 }
+

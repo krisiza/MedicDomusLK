@@ -4,6 +4,7 @@ using MedicDomusLK.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MedicDomusLK.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250108075108_doctorpatientservices")]
+    partial class doctorpatientservices
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,10 +36,7 @@ namespace MedicDomusLK.Migrations
                     b.Property<int>("ServiceId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("DoctorId", "PatientId", "ServiceId", "Date");
+                    b.HasKey("DoctorId", "PatientId", "ServiceId");
 
                     b.HasIndex("PatientId");
 
@@ -286,14 +286,6 @@ namespace MedicDomusLK.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "335555aa-3095-43fa-8814-a38f7f82fdb0",
-                            Name = "Doctor",
-                            NormalizedName = "DOCTOR"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -455,33 +447,6 @@ namespace MedicDomusLK.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            UserId = "98812fb7-dccf-4d94-a4df-763a19d14de1",
-                            RoleId = "335555aa-3095-43fa-8814-a38f7f82fdb0"
-                        },
-                        new
-                        {
-                            UserId = "4d058864-36b6-4b9b-816d-4268dc6f5a29",
-                            RoleId = "335555aa-3095-43fa-8814-a38f7f82fdb0"
-                        },
-                        new
-                        {
-                            UserId = "e28ab9f3-d2f2-4113-bf21-c384a607bba7",
-                            RoleId = "335555aa-3095-43fa-8814-a38f7f82fdb0"
-                        },
-                        new
-                        {
-                            UserId = "4400e765-e75d-41ca-a99e-e0b0f007b505",
-                            RoleId = "335555aa-3095-43fa-8814-a38f7f82fdb0"
-                        },
-                        new
-                        {
-                            UserId = "45397492-a4b8-4114-88d2-26cd7d598b6d",
-                            RoleId = "335555aa-3095-43fa-8814-a38f7f82fdb0"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -534,113 +499,6 @@ namespace MedicDomusLK.Migrations
                     b.HasIndex("TownId");
 
                     b.HasDiscriminator().HasValue("ApplicationUser");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "98812fb7-dccf-4d94-a4df-763a19d14de1",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "d6f7eb52-d5ae-4d2e-8ec1-4a262d2ac799",
-                            Email = "doctor1@example.com",
-                            EmailConfirmed = true,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "DOCTOR1@EXAMPLE.COM",
-                            NormalizedUserName = "DOCTOR1@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEKkYcRpy4jPruuxANSjLERb9PXYV+4Ycy8aXeqJCBrl5MUyafHxurpNg8eMnRFHMxw==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "95e536c5-51bd-4414-9d24-b2e84e3a920c",
-                            TwoFactorEnabled = false,
-                            UserName = "doctor1@example.com",
-                            Birthdate = new DateTime(1980, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Firstname = "John",
-                            Lastname = "Doe",
-                            Street = "123 Elm Street",
-                            TownId = 1
-                        },
-                        new
-                        {
-                            Id = "4d058864-36b6-4b9b-816d-4268dc6f5a29",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "708917d4-918a-4c2b-944d-53e60e8fde6d",
-                            Email = "doctor2@example.com",
-                            EmailConfirmed = true,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "DOCTOR2@EXAMPLE.COM",
-                            NormalizedUserName = "DOCTOR2@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEKuyEtN3HieChsVb1K7/QXX3ZVcPkim6itNsxIj1ToFJtkm2yLEdmJ+NUJNQPiDPDA==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "3fb8ec3d-6433-41d3-b572-746674ed7e23",
-                            TwoFactorEnabled = false,
-                            UserName = "doctor2@example.com",
-                            Birthdate = new DateTime(1985, 2, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Firstname = "Jane",
-                            Lastname = "Smith",
-                            Street = "456 Oak Avenue",
-                            TownId = 2
-                        },
-                        new
-                        {
-                            Id = "e28ab9f3-d2f2-4113-bf21-c384a607bba7",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "b4c83ee9-8f46-4608-bf31-39717691b7e5",
-                            Email = "doctor3@example.com",
-                            EmailConfirmed = true,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "DOCTOR3@EXAMPLE.COM",
-                            NormalizedUserName = "DOCTOR3@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEDhnIW0x+GmelvlAsRXVGcgqqrnjgcrOA9VVxfKujmx4elcU0aG2YZvKPwT6cjKUbA==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "e3cbf398-07cf-4f69-ad09-d98d96367249",
-                            TwoFactorEnabled = false,
-                            UserName = "doctor3@example.com",
-                            Birthdate = new DateTime(1990, 3, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Firstname = "Emily",
-                            Lastname = "Johnson",
-                            Street = "789 Pine Lane",
-                            TownId = 3
-                        },
-                        new
-                        {
-                            Id = "4400e765-e75d-41ca-a99e-e0b0f007b505",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "0a2f0d56-85ee-4581-94ba-ca05338a7b80",
-                            Email = "doctor4@example.com",
-                            EmailConfirmed = true,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "DOCTOR4@EXAMPLE.COM",
-                            NormalizedUserName = "DOCTOR4@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEAvBNLaQXnIb5fKHbaKmk1T0nlxnL3ufoaNslpkX2yHM4W3nGYx9tYBrl6cQdqvvPA==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "236e2277-18b6-4353-b5b1-c2c8bcf7ee23",
-                            TwoFactorEnabled = false,
-                            UserName = "doctor4@example.com",
-                            Birthdate = new DateTime(1975, 4, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Firstname = "Michael",
-                            Lastname = "Brown",
-                            Street = "321 Maple Court",
-                            TownId = 4
-                        },
-                        new
-                        {
-                            Id = "45397492-a4b8-4114-88d2-26cd7d598b6d",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "4a2abe18-d1c6-4553-a2e2-c37c4f4629a3",
-                            Email = "doctor5@example.com",
-                            EmailConfirmed = true,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "DOCTOR5@EXAMPLE.COM",
-                            NormalizedUserName = "DOCTOR5@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEMVM0X8mD8YJERY0x17X/1L14G8mY28/RRSNXpPrhvDcxtxmmzbFeP+XZVtGmm9/NA==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "dc3dee06-49fd-46a0-8bb1-62551041e6e5",
-                            TwoFactorEnabled = false,
-                            UserName = "doctor5@example.com",
-                            Birthdate = new DateTime(1983, 5, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Firstname = "Sarah",
-                            Lastname = "Davis",
-                            Street = "654 Birch Blvd",
-                            TownId = 5
-                        });
                 });
 
             modelBuilder.Entity("MedicDomusLK.Data.Models.DoctorPatientService", b =>
