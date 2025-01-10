@@ -10,16 +10,17 @@ namespace MedicDomusLK.Services
     {
         private readonly IRepository<ApplicationUser, string> userRepository;
 
+
         public ApplicationUserService(IRepository<ApplicationUser, string> userRepository)
         {
             this.userRepository = userRepository;
         }
 
-        public Task<ApplicationUser?> GetByIdentityIdAsync(string id)
+        public async Task<ApplicationUser?> GetByEmailAsync(string email)
         {
-            var user = userRepository.GetAllAttached()
+            var user = await userRepository.GetAllAttached()
                 .Include(u => u.Town)
-                .Where(u => u.Id == id)
+                .Where(u => u.Email == email)
                 .FirstOrDefaultAsync();
 
             return user;
@@ -38,15 +39,18 @@ namespace MedicDomusLK.Services
         public async Task<bool> UpdateAsync(ApplicationUser item)
             => await userRepository.UpdateAsync(item);
 
+        public bool Update(ApplicationUser item)
+         =>  userRepository.Update(item);
+
         public async Task DeleteAsync(string userId)
         {
-            var user = await GetByIdentityIdAsync(userId);
+            var user = await GetByIdAsync(userId);
             userRepository.Delete(user.Id);
         }
 
         public async Task<UserProfilViewModel?> ShowUserProfileModelAsync(string id)
         {
-            var user = await GetByIdentityIdAsync(id);
+            var user = await GetByIdAsync(id);
 
             if (user == null) return null;
 
@@ -63,5 +67,8 @@ namespace MedicDomusLK.Services
 
             return viewModel;
         }
+
+        public IQueryable<ApplicationUser> GetAllAttached()
+            => userRepository.GetAllAttached();
     }
 }

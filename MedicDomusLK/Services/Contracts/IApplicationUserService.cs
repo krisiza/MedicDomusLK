@@ -5,10 +5,13 @@ namespace MedicDomusLK.Services.Contracts
 {
     public interface IApplicationUserService
     {
+        //Task<List<ApplicationUser>> GetAllDoctorsAsync();
         Task DeleteAsync(string userId);
         Task<UserProfilViewModel?> ShowUserProfileModelAsync(string id);
         Task<bool> UpdateAsync(ApplicationUser item);
+        public bool Update(ApplicationUser item);
         Task<ApplicationUser?> GetByIdAsync(string id);
-        Task<ApplicationUser?> GetByIdentityIdAsync(string id);
+        Task<ApplicationUser?> GetByEmailAsync(string email);
+        IQueryable<ApplicationUser> GetAllAttached();
     }
 }

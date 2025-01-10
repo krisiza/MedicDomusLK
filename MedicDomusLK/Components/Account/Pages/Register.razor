@@ -4,6 +4,7 @@
 @using System.Text.Encodings.Web
 @using MedicDomusLK.Data.Models
 @using MedicDomusLK.Data.Models.Enums
+@using MedicDomusLK.Services.Contracts
 @using Microsoft.AspNetCore.Identity
 @using Microsoft.AspNetCore.WebUtilities
 
@@ -14,6 +15,7 @@
 @inject ILogger<Register> Logger
 @inject NavigationManager NavigationManager
 @inject IdentityRedirectManager RedirectManager
+@inject ITownService townService
 
 <PageTitle>Register</PageTitle>
 
@@ -43,54 +45,54 @@
                 </div>
                 <div class="form-floating mb-3">
                     <InputText type="password" @bind-Value="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
-                    <label for="password">Password</label>
+                    <label for="password">Passwort</label>
                     <ValidationMessage For="() => Input.Password" class="text-danger" />
                 </div>
                 <div class="form-floating mb-3">
                     <InputText type="password" @bind-Value="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
-                    <label for="confirm-password">Confirm Password</label>
+                    <label for="confirm-password">Passwort bestätigen</label>
                     <ValidationMessage For="() => Input.ConfirmPassword" class="text-danger" />
                 </div>
                 <div class="form-floating mb-3">
                     <InputText @bind-Value="Input.Firstname" class="form-control" autocomplete="firstname" aria-required="true" placeholder="Firstname" />
-                    <label for="firstname">Firstname</label>
+                    <label for="firstname">Vorname</label>
                     <ValidationMessage For="() => Input.Firstname" class="text-danger" />
                 </div>
                 <div class="form-floating mb-3">
                     <InputText @bind-Value="Input.Lastname" class="form-control" autocomplete="lastname" aria-required="true" placeholder="Lastname" />
-                    <label for="lastname">Lastname</label>
+                    <label for="lastname">Familienname</label>
                     <ValidationMessage For="() => Input.Lastname" class="text-danger" />
                 </div>
                 <div class="form-floating mb-3">
                     <InputDate @bind-Value="Input.Birthdate" class="form-control" autocomplete="bday" aria-required="true" />
-                    <label for="birthdate">Birthdate</label>
+                    <label for="birthdate">Geburtsdatum</label>
                     <ValidationMessage For="() => Input.Birthdate" class="text-danger" />
                 </div>
                 <div class="form-floating mb-3">
                     <InputSelect @bind-Value="Input.Gender" class="form-control">
-                        <option value="">Select Gender</option>
+                        <option value="">Geschlecht</option>
                         @foreach (Gender gender in Enum.GetValues(typeof(Gender)))
                         {
                             <option value="@((int)gender)">@gender</option>
                         }
                     </InputSelect>
-                    <label for="gender">Gender</label>
+                    <label for="gender">Geschlecht</label>
                     <ValidationMessage For="() => Input.Gender" class="text-danger" />
                 </div>
                 <div class="form-floating mb-3">
                     <InputSelect @bind-Value="Input.TownId" class="form-control">
-                        <option value="">Select Gender</option>
+                        <option value="">Wählen Sie Ihre Stadt</option>
                         @foreach (Town town in Towns)
                         {
                             <option value="@town.Id">@town.Name</option>
                         }
                     </InputSelect>
-                    <label for="town">Town</label>
+                    <label for="town">Wählen Sie Ihre Stadt</label>
                     <ValidationMessage For="() => Input.TownId" class="text-danger" />
                 </div>
                 <div class="form-floating mb-3">
                     <InputText @bind-Value="Input.Street" class="form-control" autocomplete="street" aria-required="true" placeholder="Street" />
-                    <label for="street">Street</label>
+                    <label for="street">Straße</label>
                     <ValidationMessage For="() => Input.Street" class="text-danger" />
                 </div>
                 <button type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
@@ -114,32 +116,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        Towns = new List<Town>()
-        {
-            new Town { Id = 1, PLZ = "93047", Name = "Regensburg" },
-               new Town { Id = 2, PLZ = "92318", Name = "Neumarkt in der Oberpfalz" },
-               new Town { Id = 3, PLZ = "92224", Name = "Amberg" },
-               new Town { Id = 4, PLZ = "92237", Name = "Sulzbach-Rosenberg" },
-               new Town { Id = 5, PLZ = "92703", Name = "Leuchtenberg" },
-               new Town { Id = 6, PLZ = "93059", Name = "Regensburg-West" },
-               new Town { Id = 7, PLZ = "92334", Name = "Berching" },
-               new Town { Id = 8, PLZ = "92421", Name = "Schwandorf" },
-               new Town { Id = 9, PLZ = "92339", Name = "Beilngries" },
-               new Town { Id = 10, PLZ = "92271", Name = "Hirschau" },
-               new Town { Id = 11, PLZ = "92271", Name = "Freudenberg" },
-               new Town { Id = 12, PLZ = "92353", Name = "Postbauer-Heng" },
-               new Town { Id = 13, PLZ = "92718", Name = "Vohenstrauß" },
-               new Town { Id = 14, PLZ = "93073", Name = "Wenzenbach" },
-               new Town { Id = 15, PLZ = "92442", Name = "Oberviechtach" },
-               new Town { Id = 16, PLZ = "93413", Name = "Cham" },
-               new Town { Id = 17, PLZ = "93444", Name = "Bad Kötzting" },
-               new Town { Id = 18, PLZ = "92266", Name = "Ensdorf" },
-               new Town { Id = 19, PLZ = "92431", Name = "Neunburg vorm Wald" },
-               new Town { Id = 20, PLZ = "93092", Name = "Barbing" },
-               new Town { Id = 21, PLZ = "92699", Name = "Wiesau" },
-               new Town { Id = 22, PLZ = "92439", Name = "Bodenwöhr" }
-        };
-
+        Towns = await townService.GetAllAsync();
     }
 
     public async Task RegisterUser(EditContext editContext)

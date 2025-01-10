@@ -74,20 +74,7 @@ h2 {
         justify-content: center;
     }
 
-.buttons-container > .button {
-    padding: 0.8em 2em;
-    background-color: #4d73db;
-    border: 2px solid white;
-    border-radius: 3em;
-    color: white;
-    text-decoration: none;
-}
-
-    .buttons-container > .button:hover {
-        box-shadow: 22px 5px 10px #b8d2e0;
-    }
-
-.info-container > .first {
+ a {
     text-decoration: none;
     color: white;
     font-weight: bold;
@@ -97,7 +84,7 @@ h2 {
     background-color: transparent;
 }
 
-.home-page-container > .first:hover {
+a:hover {
     color: white;
     font-size: 1.1em;
 }
@@ -108,6 +95,20 @@ h2 {
     justify-content: center;
     gap: 2em;
 }
+
+    .buttons-container > .button {
+        padding: 0.8em 2em;
+        background-color: #4d73db;
+        border: 2px solid white;
+        border-radius: 3em;
+        color: white;
+        text-decoration: none;
+    }
+
+        .buttons-container > .button:hover {
+            box-shadow: 22px 5px 10px #b8d2e0;
+        }
+
 
 
 .location {
