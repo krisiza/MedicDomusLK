@@ -1,5 +1,7 @@
 ﻿@page "/doctorinfo/{DoctorId:int}"
+@attribute [Authorize]
 @using MedicDomusLK.Data.Models
+@using Microsoft.AspNetCore.Authorization
 
 @rendermode InteractiveServer
 
@@ -26,7 +28,7 @@
                             <option></option>
                             @foreach (Service s in services)
                             {
-                                <option value="@doctorPatientService.Service.Name">@s.Name</option>
+                                <option value="@s.Name">@s.Name</option>
                             }
                         </InputSelect>
                     }

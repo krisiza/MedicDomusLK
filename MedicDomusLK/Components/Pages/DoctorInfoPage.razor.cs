@@ -1,10 +1,12 @@
-﻿using MedicDomusLK.Data.Models;
+﻿using Itenso.TimePeriod;
+using MedicDomusLK.Data.Models;
 using MedicDomusLK.Services.Contracts;
 using MedicDomusLK.ViewModels;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.JSInterop;
 using System.Security.Claims;
 
@@ -12,10 +14,11 @@ namespace MedicDomusLK.Components.Pages
 {
     public partial class DoctorInfoPage
     {
-        [Inject] private IDoctorInfoService doctorInfoService { get; set; } = null!;
-        [Inject] private IServiceService serviceService { get; set; } = null!;
-        [Inject] private AuthenticationStateProvider provider { get; set; } = null!;
-        [Inject] private IDoctorPatientServiceService dpsService { get; set; } = null!;
+        [Inject] private IDoctorInfoService DoctorInfoService { get; set; } = null!;
+        [Inject] private IServiceService ServiceService { get; set; } = null!;
+        [Inject] private AuthenticationStateProvider Provider { get; set; } = null!;
+        [Inject] private NavigationManager Navigation { get; set; } = null!;
+        [Inject] private IDoctorPatientServiceService DpsService { get; set; } = null!;
         [Inject] IJSRuntime JsRuntime { get; set; } = null!;
 
         [Parameter]
@@ -31,17 +34,24 @@ namespace MedicDomusLK.Components.Pages
 
         protected override async Task OnInitializedAsync()
         {
-            doctorPatientService.DateStart = DateTime.Now;
-            var authState = await provider.GetAuthenticationStateAsync();
+            var authState = await Provider.GetAuthenticationStateAsync();
             var user = authState.User;
 
             if (user.Identity != null && user.Identity.IsAuthenticated)
                 UserId = user.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
-            entity = await doctorInfoService.GetAllAttached()
+            if (!user.Identity?.IsAuthenticated ?? true)
+            {
+                Navigation.NavigateTo("/login", true);
+            }
+
+
+            doctorPatientService.DateStart = DateTime.Now;
+
+            entity = await DoctorInfoService.GetAllAttached()
                 .FirstOrDefaultAsync(u => u.Id == DoctorId);
 
-            services = serviceService.GetAllAttached().ToList();
+            services = ServiceService.GetAllAttached().ToList();
             doctorPatientService.Service = new();
         }
         private async Task HandleClick(Microsoft.AspNetCore.Components.Web.MouseEventArgs e)
@@ -55,21 +65,41 @@ namespace MedicDomusLK.Components.Pages
             doctorPatientService.TimeRange.Start = doctorPatientService.DateStart;
             doctorPatientService.TimeRange.End = doctorPatientService.DateEnd;
 
-            var isfree = await dpsService.IsHourFreeAsync(doctorPatientService.TimeRange, entity.Doctor.Id);
+            var isfree = await DpsService.IsHourFreeAsync(doctorPatientService.TimeRange, entity.Doctor.Id);
 
             if (!isfree)
             {
                 await JsRuntime.InvokeVoidAsync("alert", "Termin ist schon vergeben!");
             }
+            else if(doctorPatientService.DateStart.Hour < 7 || doctorPatientService.DateEnd.Hour > 18)
+            {
+                await JsRuntime.InvokeVoidAsync("alert", "Außerhalb der Arbeitszeit!");
+            }
+            else if(doctorPatientService.DateStart < DateTime.Now)
+            {
+                await JsRuntime.InvokeVoidAsync("alert", "Wählen Sie gültiges Datum!");
+            }
             else
             {
-                var serviceId = services.FirstOrDefault(s => s.Name == doctorPatientService.Service.Name).Id; ;
-                await dpsService.AddDpsEntityAsync(doctorPatientService, serviceId);
+                var service = services.FirstOrDefault(s => s.Name == doctorPatientService.Service.Name);
 
-                await JsRuntime.InvokeVoidAsync("reloadPage");
-                await JsRuntime.InvokeVoidAsync("alert", $"Ihr Termin für {doctorPatientService.Service.Name} am {doctorPatientService.DateStart} ist gespeicher!");
+                if (service != null)
+                {
+                    await DpsService.AddDpsEntityAsync(doctorPatientService, service.Id);
+                    await JsRuntime.InvokeVoidAsync("alert", $"Ihr Termin für {doctorPatientService.Service.Name} am {doctorPatientService.DateStart} ist gespeicher!");
+                    doctorPatientService = new DoctorPatientServiceViewModel
+                    {
+                        DateStart = DateTime.Now,
+                        Service = new()
+                    };
+                }
+                else
+                {
+                    await JsRuntime.InvokeVoidAsync("alert", $"Service nicht gefunden!");
+                }
             }
         }      
+
     }
 }
 

@@ -97,7 +97,7 @@ namespace Microsoft.AspNetCore.Routing
                 var logins = await userManager.GetLoginsAsync(user);
                 foreach (var l in logins)
                 {
-                    personalData.Add($"{l.LoginProvider} external login provider key", l.ProviderKey);
+                    personalData.Add($"{l.LoginProvider} external login Provider key", l.ProviderKey);
                 }
 
                 personalData.Add("Authenticator Key", (await userManager.GetAuthenticatorKeyAsync(user))!);

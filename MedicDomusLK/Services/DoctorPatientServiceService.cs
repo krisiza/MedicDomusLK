@@ -19,13 +19,14 @@ namespace MedicDomusLK.Services
         public async Task<bool> IsHourFreeAsync(TimeRange timeRange, string doctorId)
         {
           var listentites = await dpsRepository.GetAllAttached()
+                .Where(d => d.DoctorId == doctorId)
                 .ToListAsync();
 
             foreach (var item in listentites)
             {
                 TimeRange entityRange = new TimeRange(item.DateStart, item.DateEnd);
 
-                if (entityRange.HasInside(timeRange))
+                if (timeRange.OverlapsWith(entityRange))
                 {
                     return false;
                 }

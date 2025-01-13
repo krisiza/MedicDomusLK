@@ -1,14 +1,8 @@
-using Humanizer;
-using Itenso.TimePeriod;
-using MedicDomusLK.Components.Pages;
 using MedicDomusLK.Data.Models;
 using MedicDomusLK.Data.Models.Enums;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection;
-using System.Runtime.ConstrainedExecution;
-using System;
 
 namespace MedicDomusLK.Data
 {
@@ -396,56 +390,64 @@ namespace MedicDomusLK.Data
                     DoctorId = users[0].Id,
                     PatientId = patients[0].Id,
                     ServiceId = 1,
-                    DateStart = new DateTime(2025, 1, 10, 13, 00 , 00)
+                    DateStart = new DateTime(2025, 1, 10, 13, 00 , 00),
+                    DateEnd = new DateTime(2025, 1, 10, 14, 00 , 00),
                 },
                 new DoctorPatientService
                 {
                     DoctorId = users[1].Id,
                     PatientId = patients[1].Id,
                     ServiceId = 2,
-                    DateStart = new DateTime(2025, 1, 11, 8, 00 , 00)
+                    DateStart = new DateTime(2025, 1, 11, 8, 00 , 00),
+                    DateEnd = new DateTime(2025, 1, 11, 9, 00 , 00)
                 },
                 new DoctorPatientService
                 {
                     DoctorId = users[2].Id,
                     PatientId = patients[2].Id,
                     ServiceId = 3,
-                    DateStart = new DateTime(2025, 1, 12, 10, 00 , 00)
+                    DateStart = new DateTime(2025, 1, 12, 10, 00 , 00),
+                    DateEnd = new DateTime(2025, 1, 12, 11, 00 , 00)
                 },
                 new DoctorPatientService
                 {
                     DoctorId = users[3].Id,
                     PatientId = patients[3].Id,
                     ServiceId = 4,
-                    DateStart = new DateTime(2025, 1, 13, 13, 00 , 00)
+                    DateStart = new DateTime(2025, 1, 13, 13, 00 , 00),
+                      DateEnd = new DateTime(2025, 1, 13, 14, 00 , 00)
                 },
                 new DoctorPatientService
                 {
                     DoctorId = users[0].Id,
                     PatientId = patients[5].Id,
                     ServiceId = 1,
-                    DateStart = new DateTime(2025, 1, 15, 15, 00, 00)
+                    DateStart = new DateTime(2025, 1, 15, 15, 00, 00),
+                    DateEnd = new DateTime(2025, 1, 15, 16, 00, 00)
                 },
                 new DoctorPatientService
                 {
                     DoctorId = users[1].Id,
                     PatientId = patients[6].Id,
                     ServiceId = 2,
-                    DateStart = new DateTime(2025, 1, 16, 9, 00, 00)
+                    DateStart = new DateTime(2025, 1, 16, 9, 00, 00),
+                    DateEnd = new DateTime(2025, 1, 16, 10, 00, 00)
                 },
                 new DoctorPatientService
                 {
                     DoctorId = users[2].Id,
                     PatientId = patients[7].Id,
                     ServiceId = 3,
-                    DateStart = new DateTime(2025, 1, 17, 8, 00, 00)
+                    DateStart = new DateTime(2025, 1, 17, 8, 00, 00),
+                    DateEnd = new DateTime(2025, 1, 17, 9, 00, 00),
                 },
                 new DoctorPatientService
                 {
                     DoctorId = users[3].Id,
                     PatientId = patients[8].Id,
                     ServiceId = 4,
-                    DateStart = new DateTime(2025, 1, 18, 7, 00, 00)
+                    DateStart = new DateTime(2025, 1, 18, 7, 00, 00),
+                    DateEnd = new DateTime(2025, 1, 18, 8, 00, 00)
                 },
             };
 

@@ -70,7 +70,7 @@
     {
         if (RemoteError is not null)
         {
-            RedirectManager.RedirectToWithStatus("Account/Login", $"Error from external provider: {RemoteError}", HttpContext);
+            RedirectManager.RedirectToWithStatus("Account/Login", $"Error from external Provider: {RemoteError}", HttpContext);
         }
 
         var info = await SignInManager.GetExternalLoginInfoAsync();
@@ -97,7 +97,7 @@
 
     private async Task OnLoginCallbackAsync()
     {
-        // Sign in the user with this external login provider if the user already has a login.
+        // Sign in the user with this external login Provider if the user already has a login.
         var result = await SignInManager.ExternalLoginSignInAsync(
             externalLoginInfo.LoginProvider,
             externalLoginInfo.ProviderKey,
@@ -107,7 +107,7 @@
         if (result.Succeeded)
         {
             Logger.LogInformation(
-                "{Name} logged in with {LoginProvider} provider.",
+                "{Name} logged in with {LoginProvider} Provider.",
                 externalLoginInfo.Principal.Identity?.Name,
                 externalLoginInfo.LoginProvider);
             RedirectManager.RedirectTo(ReturnUrl);
@@ -138,7 +138,7 @@
             result = await UserManager.AddLoginAsync(user, externalLoginInfo);
             if (result.Succeeded)
             {
-                Logger.LogInformation("User created an account using {Name} provider.", externalLoginInfo.LoginProvider);
+                Logger.LogInformation("User created an account using {Name} Provider.", externalLoginInfo.LoginProvider);
 
                 var userId = await UserManager.GetUserIdAsync(user);
                 var code = await UserManager.GenerateEmailConfirmationTokenAsync(user);

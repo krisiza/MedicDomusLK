@@ -22,7 +22,7 @@ namespace MedicDomusLK.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("MedicDomusLK.Data.Models.DoctorInfoPage", b =>
+            modelBuilder.Entity("MedicDomusLK.Data.Models.DoctorInfo", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -63,7 +63,7 @@ namespace MedicDomusLK.Migrations
                         {
                             Id = 1,
                             Description = "Dr. Harris ist spezialisiert auf die Behandlung von Erkrankungen der Knochen, Gelenke und Muskeln und hilft Patienten, sich von Verletzungen und Operationen zu erholen. Mit seiner Expertise in der Orthopädie und Rehabilitation bietet er maßgeschneiderte Behandlungspläne, die sowohl konservative Therapieansätze als auch operative Eingriffe umfassen. Dr. Harris behandelt eine Vielzahl von Erkrankungen wie Arthritis, Bandscheibenvorfälle, Knochenbrüche und Sportverletzungen. Durch moderne diagnostische Verfahren und präzise therapeutische Maßnahmen sorgt er dafür, dass Patienten eine schnelle und vollständige Genesung erfahren. Zusätzlich legt er großen Wert auf die Prävention von orthopädischen Problemen und berät seine Patienten zu ergonomischen Praktiken, Sport und Übungen, die die Muskulatur stärken und Verletzungen vorbeugen. Mit einem empathischen Ansatz begleitet er seine Patienten während des gesamten Heilungsprozesses und stellt sicher, dass sie zu einer besseren Lebensqualität zurückkehren.",
-                            DoctorId = "c6ad3b43-cbba-49fe-8257-996ce2b72cd9",
+                            DoctorId = "0b9d2ed9-574c-4ddc-9737-87114c203f75",
                             ExperienceYear = 20,
                             Img = "https://www.teleclinic.com/wp-content/uploads/teleclinic-hero-slider-1-image-6.webp",
                             Score = 10.0,
@@ -73,7 +73,7 @@ namespace MedicDomusLK.Migrations
                         {
                             Id = 2,
                             Description = "Dr. Smith konzentriert sich auf die Hautpflege und hilft Patienten bei einer Vielzahl von Hauterkrankungen, darunter Akne, Ekzeme und Psoriasis. Mit ihrer langjährigen Erfahrung in der Dermatologie bietet sie sowohl medizinische Behandlungen als auch ästhetische Lösungen an, um das Hautbild ihrer Patienten zu verbessern. Sie verwendet modernste Technologien und Verfahren, um Hautkrankheiten effektiv zu behandeln und das Wohlbefinden ihrer Patienten zu steigern. Dr. Clarke legt großen Wert auf eine individuelle Beratung und maßgeschneiderte Behandlungskonzepte, die den spezifischen Bedürfnissen jedes Patienten gerecht werden. Sie setzt sich zudem für die Prävention von Hautkrebs ein und bietet regelmäßige Hautscreenings zur frühzeitigen Erkennung von Hautveränderungen an. Mit ihrer empathischen und professionellen Art sorgt Dr. Clarke dafür, dass ihre Patienten nicht nur medizinische Hilfe erhalten, sondern sich auch in ihrer Haut wieder wohlfühlen.",
-                            DoctorId = "90798a5b-115f-4a1e-83ad-d112e6d66649",
+                            DoctorId = "4f202f6a-b381-4406-a250-8d411f260844",
                             ExperienceYear = 9,
                             Img = "https://www.collinsdictionary.com/images/full/doctor_117169531.jpg",
                             Score = 9.4399999999999995,
@@ -82,10 +82,10 @@ namespace MedicDomusLK.Migrations
                         new
                         {
                             Id = 3,
-                            Description = "Dr. Johnsonoy ist spezialisiert auf die Behandlung von Kindern und sorgt für deren gesundes Wachstum und Entwicklung. Sie ist bekannt für ihre einfühlsame Betreuung und ihre Fähigkeit, eine vertrauensvolle Verbindung zu jungen Patienten und ihren Familien aufzubauen. Ihr Schwerpunkt liegt auf der Prävention von Krankheiten sowie der Diagnose und Behandlung von kindlichen Gesundheitsproblemen, um eine optimale Entwicklung zu fördern. Dr. Roy setzt sich dafür ein, dass jedes Kind die beste medizinische Versorgung erhält, mit besonderem Augenmerk auf deren emotionales Wohlbefinden während der Behandlung. Sie arbeitet eng mit den Eltern zusammen, um individuelle Gesundheitspläne zu erstellen, die auf die Bedürfnisse jedes einzelnen Kindes abgestimmt sind.",
-                            DoctorId = "5d2f81d6-a71c-4e40-9c62-896c856563ca",
+                            Description = "Dr. Johnson ist spezialisiert auf die Behandlung von Kindern und sorgt für deren gesundes Wachstum und Entwicklung. Sie ist bekannt für ihre einfühlsame Betreuung und ihre Fähigkeit, eine vertrauensvolle Verbindung zu jungen Patienten und ihren Familien aufzubauen. Ihr Schwerpunkt liegt auf der Prävention von Krankheiten sowie der Diagnose und Behandlung von kindlichen Gesundheitsproblemen, um eine optimale Entwicklung zu fördern. Dr. Roy setzt sich dafür ein, dass jedes Kind die beste medizinische Versorgung erhält, mit besonderem Augenmerk auf deren emotionales Wohlbefinden während der Behandlung. Sie arbeitet eng mit den Eltern zusammen, um individuelle Gesundheitspläne zu erstellen, die auf die Bedürfnisse jedes einzelnen Kindes abgestimmt sind.",
+                            DoctorId = "2faf4874-69cc-42d2-b4c8-bf5f896a2439",
                             ExperienceYear = 5,
-                            Img = "https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-ios7-arrow-right-128.png",
+                            Img = "https://img.freepik.com/fotos-kostenlos/schoene-junge-aerztin-die-kamera-im-buero-betrachtet_1301-7807.jpg",
                             Score = 9.9000000000000004,
                             Sector = "Pädiaterin"
                         },
@@ -93,9 +93,9 @@ namespace MedicDomusLK.Migrations
                         {
                             Id = 4,
                             Description = "Dr. Garcia ist ein führender Kardiologe mit umfassender Erfahrung in der Diagnose und Behandlung von Herzkrankheiten. Er hat sich auf die Behandlung von Herzinsuffizienz, koronaren Herzkrankheiten, Bluthochdruck und anderen kardiovaskulären Erkrankungen spezialisiert. Dr. Smith nutzt modernste diagnostische Verfahren wie EKG, Herzultraschall und Belastungstests, um eine präzise Diagnose zu stellen. Er legt großen Wert auf eine ganzheitliche Betreuung seiner Patienten, indem er individuelle Therapiepläne erstellt, die sowohl medikamentöse Behandlungen als auch Änderungen des Lebensstils umfassen. Darüber hinaus engagiert sich Dr. Smith aktiv in der Prävention von Herzkrankheiten und bietet seinen Patienten wertvolle Informationen zur gesunden Ernährung, regelmäßiger Bewegung und Stressbewältigung. Durch seine Expertise und einfühlsame Art hilft er seinen Patienten, ihre Lebensqualität zu verbessern und ihre Herzgesundheit langfristig zu erhalten.",
-                            DoctorId = "0f0bd57b-fc8a-4f5a-aa0d-843fc6c71a4e",
+                            DoctorId = "e39be28e-825a-4521-94a9-b1f20e2f0b8c",
                             ExperienceYear = 17,
-                            Img = "https://media.istockphoto.com/id/177373093/photo/indian-male-entity.jpg?s=612x612&w=0&k=20&c=5FkfKdCYERkAg65cQtdqeO_D0JMv6vrEdPw3mX1Lkfg=",
+                            Img = "https://media.istockphoto.com/id/177373093/photo/indian-male-doctor.jpg?s=612x612&w=0&k=20&c=5FkfKdCYERkAg65cQtdqeO_D0JMv6vrEdPw3mX1Lkfg=",
                             Score = 9.3000000000000007,
                             Sector = "Kardiologe"
                         });
@@ -129,67 +129,67 @@ namespace MedicDomusLK.Migrations
                     b.HasData(
                         new
                         {
-                            DoctorId = "c6ad3b43-cbba-49fe-8257-996ce2b72cd9",
-                            PatientId = "c7cce750-5ee7-4870-bf90-846bf41b3aef",
+                            DoctorId = "0b9d2ed9-574c-4ddc-9737-87114c203f75",
+                            PatientId = "91df25ac-9558-47fb-8e94-c45684b1aa31",
                             ServiceId = 1,
                             DateStart = new DateTime(2025, 1, 10, 13, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateEnd = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            DateEnd = new DateTime(2025, 1, 10, 14, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            DoctorId = "90798a5b-115f-4a1e-83ad-d112e6d66649",
-                            PatientId = "1877a624-8774-4c5d-bc6a-e0bfa775b8d6",
+                            DoctorId = "4f202f6a-b381-4406-a250-8d411f260844",
+                            PatientId = "a44ff257-085f-4d83-98be-0268d5c952d1",
                             ServiceId = 2,
                             DateStart = new DateTime(2025, 1, 11, 8, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateEnd = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            DateEnd = new DateTime(2025, 1, 11, 9, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            DoctorId = "5d2f81d6-a71c-4e40-9c62-896c856563ca",
-                            PatientId = "1212dc61-07b2-4851-8d12-1d6247bd7ccc",
+                            DoctorId = "2faf4874-69cc-42d2-b4c8-bf5f896a2439",
+                            PatientId = "f58938f1-16e7-4e0d-83c1-ab3cb278b3b0",
                             ServiceId = 3,
                             DateStart = new DateTime(2025, 1, 12, 10, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateEnd = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            DateEnd = new DateTime(2025, 1, 12, 11, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            DoctorId = "0f0bd57b-fc8a-4f5a-aa0d-843fc6c71a4e",
-                            PatientId = "988eef55-3693-4eaf-8fa2-3a0a944d33e0",
+                            DoctorId = "e39be28e-825a-4521-94a9-b1f20e2f0b8c",
+                            PatientId = "66f927dd-801e-4768-8874-14a49ee43c41",
                             ServiceId = 4,
                             DateStart = new DateTime(2025, 1, 13, 13, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateEnd = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            DateEnd = new DateTime(2025, 1, 13, 14, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            DoctorId = "c6ad3b43-cbba-49fe-8257-996ce2b72cd9",
-                            PatientId = "af372561-1f84-479c-b380-d740906c1014",
+                            DoctorId = "0b9d2ed9-574c-4ddc-9737-87114c203f75",
+                            PatientId = "b9ab5a62-08c7-47ad-bdac-ba3bfa361500",
                             ServiceId = 1,
                             DateStart = new DateTime(2025, 1, 15, 15, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateEnd = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            DateEnd = new DateTime(2025, 1, 15, 16, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            DoctorId = "90798a5b-115f-4a1e-83ad-d112e6d66649",
-                            PatientId = "f86df732-0766-4e52-ad7f-99f7bcb9005b",
+                            DoctorId = "4f202f6a-b381-4406-a250-8d411f260844",
+                            PatientId = "d1a23989-7fb6-4f99-8b65-8963d81d7f55",
                             ServiceId = 2,
                             DateStart = new DateTime(2025, 1, 16, 9, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateEnd = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            DateEnd = new DateTime(2025, 1, 16, 10, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            DoctorId = "5d2f81d6-a71c-4e40-9c62-896c856563ca",
-                            PatientId = "31f662be-cac9-400c-b735-be84b0d0a73d",
+                            DoctorId = "2faf4874-69cc-42d2-b4c8-bf5f896a2439",
+                            PatientId = "413dbc47-0ba1-48cc-b864-6fb8dd8c1e1a",
                             ServiceId = 3,
                             DateStart = new DateTime(2025, 1, 17, 8, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateEnd = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            DateEnd = new DateTime(2025, 1, 17, 9, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            DoctorId = "0f0bd57b-fc8a-4f5a-aa0d-843fc6c71a4e",
-                            PatientId = "04901d21-9108-446b-a62e-b129718175e9",
+                            DoctorId = "e39be28e-825a-4521-94a9-b1f20e2f0b8c",
+                            PatientId = "47162477-738b-44a6-b750-501c954224c5",
                             ServiceId = 4,
                             DateStart = new DateTime(2025, 1, 18, 7, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateEnd = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            DateEnd = new DateTime(2025, 1, 18, 8, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
 
@@ -474,7 +474,7 @@ namespace MedicDomusLK.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "7dcb4756-752a-4b6f-bc86-92dc5c3db5d6",
+                            Id = "75638117-8f89-4d1d-8669-f607f8e36d32",
                             Name = "Doctor",
                             NormalizedName = "DOCTOR"
                         });
@@ -643,23 +643,23 @@ namespace MedicDomusLK.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "c6ad3b43-cbba-49fe-8257-996ce2b72cd9",
-                            RoleId = "7dcb4756-752a-4b6f-bc86-92dc5c3db5d6"
+                            UserId = "0b9d2ed9-574c-4ddc-9737-87114c203f75",
+                            RoleId = "75638117-8f89-4d1d-8669-f607f8e36d32"
                         },
                         new
                         {
-                            UserId = "90798a5b-115f-4a1e-83ad-d112e6d66649",
-                            RoleId = "7dcb4756-752a-4b6f-bc86-92dc5c3db5d6"
+                            UserId = "4f202f6a-b381-4406-a250-8d411f260844",
+                            RoleId = "75638117-8f89-4d1d-8669-f607f8e36d32"
                         },
                         new
                         {
-                            UserId = "5d2f81d6-a71c-4e40-9c62-896c856563ca",
-                            RoleId = "7dcb4756-752a-4b6f-bc86-92dc5c3db5d6"
+                            UserId = "2faf4874-69cc-42d2-b4c8-bf5f896a2439",
+                            RoleId = "75638117-8f89-4d1d-8669-f607f8e36d32"
                         },
                         new
                         {
-                            UserId = "0f0bd57b-fc8a-4f5a-aa0d-843fc6c71a4e",
-                            RoleId = "7dcb4756-752a-4b6f-bc86-92dc5c3db5d6"
+                            UserId = "e39be28e-825a-4521-94a9-b1f20e2f0b8c",
+                            RoleId = "75638117-8f89-4d1d-8669-f607f8e36d32"
                         });
                 });
 
@@ -717,38 +717,38 @@ namespace MedicDomusLK.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "c6ad3b43-cbba-49fe-8257-996ce2b72cd9",
+                            Id = "0b9d2ed9-574c-4ddc-9737-87114c203f75",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ff2b6b67-c713-4e37-b74d-1f0c5f4fd994",
+                            ConcurrencyStamp = "197be941-0682-4ee3-9c48-384f2e92774e",
                             Email = "doctor1@example.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "DOCTOR1@EXAMPLE.COM",
                             NormalizedUserName = "DOCTOR1@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAELvj0a9z7wTcY2+0cIOnVxQPlw4Vdyth3ali5cnep4NPnSJHeOGtkla2dUtoKcIS7A==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEEy6O/ob7cGCXov+msTXdo2uVZsy2D2ctkj5oqQbhsYMBdGisjwByAZuPIplyBWrAw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d5587496-44e2-4a93-94a5-36b0da3f3563",
+                            SecurityStamp = "4698c9b4-de06-448a-846c-8f7d2c0509c4",
                             TwoFactorEnabled = false,
                             UserName = "doctor1@example.com",
                             Birthdate = new DateTime(1980, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Firstname = "John",
-                            Lastname = "Doe",
+                            Lastname = "Harris",
                             Street = "123 Elm Street",
                             TownId = 1
                         },
                         new
                         {
-                            Id = "90798a5b-115f-4a1e-83ad-d112e6d66649",
+                            Id = "4f202f6a-b381-4406-a250-8d411f260844",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "158d16a7-bcb0-4e43-91a2-b4f176ada0ac",
+                            ConcurrencyStamp = "3d3e7e5d-290f-4d70-a323-e716894993be",
                             Email = "doctor2@example.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "DOCTOR2@EXAMPLE.COM",
                             NormalizedUserName = "DOCTOR2@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAECnVUhSaZYbUNRrTJtv5Mcg2k0WZy07nc9EJUwWiFhISs3sqz1fCPhEIw/fkJB0EnQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEBQFlamGFpkaTyzSmPSl89r941nwdPn1HosLfJtangJmC6DRAq1rLhur39SAu60ZFg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "df8c47c7-c686-42c4-9478-3ab94c54a516",
+                            SecurityStamp = "2e470e07-16e4-4664-a54f-9afd402c92b6",
                             TwoFactorEnabled = false,
                             UserName = "doctor2@example.com",
                             Birthdate = new DateTime(1985, 2, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -759,17 +759,17 @@ namespace MedicDomusLK.Migrations
                         },
                         new
                         {
-                            Id = "5d2f81d6-a71c-4e40-9c62-896c856563ca",
+                            Id = "2faf4874-69cc-42d2-b4c8-bf5f896a2439",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "acc5c3d6-a77b-4d1a-918c-dad4dc038b74",
+                            ConcurrencyStamp = "649bbdff-5fd5-4b45-ba3d-aefb1fe686d5",
                             Email = "doctor3@example.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "DOCTOR3@EXAMPLE.COM",
                             NormalizedUserName = "DOCTOR3@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEJEeSSCRDgCSxvkQB83bwuzNBTY1Wemnda+I2Dj52gLOTOFqsdMoRd6IE7vfB8RVdw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEKqmNqotR5pzVaYzakO/rEW3AdCD0wEV3eKuUNzIB8qFXyaYhsJYiDGpPwNlGXp7Mw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "1e958806-6f9d-4f00-af38-8a595491d34c",
+                            SecurityStamp = "720b5555-02b4-49f3-802a-535ae87a1f5b",
                             TwoFactorEnabled = false,
                             UserName = "doctor3@example.com",
                             Birthdate = new DateTime(1990, 3, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -780,38 +780,38 @@ namespace MedicDomusLK.Migrations
                         },
                         new
                         {
-                            Id = "0f0bd57b-fc8a-4f5a-aa0d-843fc6c71a4e",
+                            Id = "e39be28e-825a-4521-94a9-b1f20e2f0b8c",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "05adde8c-8cfd-48ab-abbf-fc9069465c76",
+                            ConcurrencyStamp = "5f990be4-8f40-46c3-8ee4-ffa46909f73a",
                             Email = "doctor4@example.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "DOCTOR4@EXAMPLE.COM",
                             NormalizedUserName = "DOCTOR4@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEFiHNY5pmSe9qwsUz5m+Og1GZc1DR5EbMDzGmCixy7wIqzN1uMnQm0oLy6S3vSXwkg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEEF7ijeZh5IIABJ1U4hHKZxy7Svgh+S1zQ9MW9ABj1gROSxasCr7oofgXP0OLupw4g==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "912b3a3a-f437-49cc-8cc4-2e2f0710a8a7",
+                            SecurityStamp = "b1985eb5-ac9a-45dd-82d4-dca7930b8c2e",
                             TwoFactorEnabled = false,
                             UserName = "doctor4@example.com",
                             Birthdate = new DateTime(1975, 4, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Firstname = "Michael",
-                            Lastname = "Brown",
+                            Lastname = "Garcia",
                             Street = "321 Maple Court",
                             TownId = 4
                         },
                         new
                         {
-                            Id = "c7cce750-5ee7-4870-bf90-846bf41b3aef",
+                            Id = "91df25ac-9558-47fb-8e94-c45684b1aa31",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1173b43c-d800-4d86-9cf7-e3eddaf168b8",
+                            ConcurrencyStamp = "c0c87776-3dde-464d-b7a8-898d803d4e99",
                             Email = "alice.smith@example.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ALICE.SMITH@EXAMPLE.COM",
                             NormalizedUserName = "ALICE.SMITH",
-                            PasswordHash = "AQAAAAIAAYagAAAAECDdYg9WhFdb+jQdyWCRXBctIhurPH1yXAzv+tXUg4/X0ATGw6KZW9R6ghS7KpabNQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEKl4kDgQkEaEW5JHoSHATqooFYp1TOOaG7EZ+EegwsmyLtaX4FL5TII5VA36xnlYCw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "a8896c47-62dc-457a-bc04-0648dcecdaa4",
+                            SecurityStamp = "bc784bc3-f9fc-4896-8d8e-5872ba280461",
                             TwoFactorEnabled = false,
                             UserName = "alice.smith",
                             Birthdate = new DateTime(1990, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -823,17 +823,17 @@ namespace MedicDomusLK.Migrations
                         },
                         new
                         {
-                            Id = "1877a624-8774-4c5d-bc6a-e0bfa775b8d6",
+                            Id = "a44ff257-085f-4d83-98be-0268d5c952d1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "a43392b8-a503-4c38-a54a-6be6de73c1aa",
+                            ConcurrencyStamp = "7c31f0d8-4cad-4b4b-8dd3-e8acf18aa05a",
                             Email = "bob.johnson@example.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "BOB.JOHNSON@EXAMPLE.COM",
                             NormalizedUserName = "BOB.JOHNSON",
-                            PasswordHash = "AQAAAAIAAYagAAAAEN6KPNNCBzg25fbK3OsBaj5SFPg/3aDKzdJOZTfX9WovaG+bgzWHEwrBrSvpl+s+gA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHNrF7CiFltKhgjMwJ81HK64Q0OCHNXRGf6hb1usv3OxIEraNTg/a5d43MmKxA0jgw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e44c6e23-ad12-4461-b2a2-e8bc8f8dcae6",
+                            SecurityStamp = "b426f055-e34f-4ce8-87f3-9b9bbbd19a3a",
                             TwoFactorEnabled = false,
                             UserName = "bob.johnson",
                             Birthdate = new DateTime(1985, 5, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -845,17 +845,17 @@ namespace MedicDomusLK.Migrations
                         },
                         new
                         {
-                            Id = "1212dc61-07b2-4851-8d12-1d6247bd7ccc",
+                            Id = "f58938f1-16e7-4e0d-83c1-ab3cb278b3b0",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "44f0ffc8-85d4-4c97-a047-058c63f1e57a",
+                            ConcurrencyStamp = "4ad077c7-5fe1-4ab2-958a-bf7ebf932368",
                             Email = "cathy.williams@example.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "CATHY.WILLIAMS@EXAMPLE.COM",
                             NormalizedUserName = "CATHY.WILLIAMS",
-                            PasswordHash = "AQAAAAIAAYagAAAAEPqwzQZKpi6pgytsxsP3hi0C5A/34Pah0vWDd1JWDq2N04cthJ8Pk8mtrvx66TPZAQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEGdkT+2vcypq7FxAxYYs/kX56d+bh4rrt7yYE3pWUENr4y1KBQCSxGVpOIhGziwzCQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "cc5ef741-37f1-43dd-a014-0112f47e203b",
+                            SecurityStamp = "1a292529-23d9-4784-a733-802e5f454f4e",
                             TwoFactorEnabled = false,
                             UserName = "cathy.williams",
                             Birthdate = new DateTime(1992, 3, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -867,17 +867,17 @@ namespace MedicDomusLK.Migrations
                         },
                         new
                         {
-                            Id = "988eef55-3693-4eaf-8fa2-3a0a944d33e0",
+                            Id = "66f927dd-801e-4768-8874-14a49ee43c41",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "2e08edf4-a2a6-486c-9fe6-ff29cd4f8fdb",
+                            ConcurrencyStamp = "e843fc36-cb48-483f-a9c4-67d3969711c0",
                             Email = "david.brown@example.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "DAVID.BROWN@EXAMPLE.COM",
                             NormalizedUserName = "DAVID.BROWN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEHEidiglTubbA4P0p/ojNs5oc9d+ypkEV5RiQNDrmbubK6wWIjcpka/NGwqvv5eyZw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEAXPCWp2z7E0zobgYeTk1QKjP/foFh9SB3FXH6AgeeofV5oGPMZmXvhqupNT4irsdA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "08ffc028-cfa2-49cd-aedd-598fb81f1124",
+                            SecurityStamp = "7ac01131-e20c-42c7-8a10-d5ce16449f50",
                             TwoFactorEnabled = false,
                             UserName = "david.brown",
                             Birthdate = new DateTime(1988, 7, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -889,17 +889,17 @@ namespace MedicDomusLK.Migrations
                         },
                         new
                         {
-                            Id = "54259b15-9c38-4039-8e3c-f7e07729e0ac",
+                            Id = "41ebb6c9-4899-4469-b13f-c97af15f5d7a",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "dc8d0c4c-ce56-4674-985e-9037089d00ad",
+                            ConcurrencyStamp = "e819bb27-f9c0-486d-8de0-7ca7937bcb2c",
                             Email = "ella.jones@example.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ELLA.JONES@EXAMPLE.COM",
                             NormalizedUserName = "ELLA.JONES",
-                            PasswordHash = "AQAAAAIAAYagAAAAENHctRton8oFkKILtq2VH6AUx6/OAQYpGIj75lukdGoiiDHbFc8Ljse5n+XBTo/gfw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEI3DScwWMw3ZK/lbL/LCuwVkVq4oRm4C8Tvo+hrOH1JaBMucTJ8EyCTuxSRQcsem7g==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "90a68308-7f80-4c61-9df7-787b1f553e4b",
+                            SecurityStamp = "29ba68eb-07b0-40bf-9737-06183bd2adc8",
                             TwoFactorEnabled = false,
                             UserName = "ella.jones",
                             Birthdate = new DateTime(1995, 12, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -911,17 +911,17 @@ namespace MedicDomusLK.Migrations
                         },
                         new
                         {
-                            Id = "af372561-1f84-479c-b380-d740906c1014",
+                            Id = "b9ab5a62-08c7-47ad-bdac-ba3bfa361500",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "fa0e998f-fba3-4847-8cae-b32d6cd8a355",
+                            ConcurrencyStamp = "40eb07b3-661f-472f-b9b6-3246c6534f60",
                             Email = "frank.garcia@example.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "FRANK.GARCIA@EXAMPLE.COM",
                             NormalizedUserName = "FRANK.GARCIA",
-                            PasswordHash = "AQAAAAIAAYagAAAAEAkz4V4K94quJAzrGNvadO7CLE+/U+fzPBAGDL/w9eCpYm/9YYlP01pWWboLNHVzrw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAELWQsYHPSU23/XvwX7+yM5bOgu8wElPCg5oJ+1PxPIVNxMdDbu0/j696tX3Da7c+1A==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "7bb5dcc8-b84a-4f18-b5fa-0d7e9f622fe5",
+                            SecurityStamp = "236d3601-684a-4aa9-bc1d-3449e5507cde",
                             TwoFactorEnabled = false,
                             UserName = "frank.garcia",
                             Birthdate = new DateTime(1993, 2, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -933,17 +933,17 @@ namespace MedicDomusLK.Migrations
                         },
                         new
                         {
-                            Id = "f86df732-0766-4e52-ad7f-99f7bcb9005b",
+                            Id = "d1a23989-7fb6-4f99-8b65-8963d81d7f55",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d5dd9160-c55f-4875-b0da-c109005823a7",
+                            ConcurrencyStamp = "f4f04534-13b7-4cb1-b3a6-e8e404d03ae5",
                             Email = "grace.martinez@example.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "GRACE.MARTINEZ@EXAMPLE.COM",
                             NormalizedUserName = "GRACE.MARTINEZ",
-                            PasswordHash = "AQAAAAIAAYagAAAAEPByo/ujmBwLdemDEMGgaXVtRVHnYTpk6zI7PW8umlZBZRe6uNYMh+f9UFHSYSR7pw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEAV7LGw7e8biSGAPxdHEeoXhJhr5mXxZ+c9qLBpqifmHZ4htozhZvkH4T9t6K0lugQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "a017cbf6-7cd0-4bbe-b024-fd666d81e136",
+                            SecurityStamp = "f66d5fee-0e76-4d4d-8c86-12b69ac7c8f5",
                             TwoFactorEnabled = false,
                             UserName = "grace.martinez",
                             Birthdate = new DateTime(1991, 6, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -955,17 +955,17 @@ namespace MedicDomusLK.Migrations
                         },
                         new
                         {
-                            Id = "31f662be-cac9-400c-b735-be84b0d0a73d",
+                            Id = "413dbc47-0ba1-48cc-b864-6fb8dd8c1e1a",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e1b3ae0f-e437-4bd1-9fb7-005b400bf431",
+                            ConcurrencyStamp = "3debc8b5-dadd-4015-a031-4794ec74ab24",
                             Email = "henry.rodriguez@example.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "HENRY.RODRIGUEZ@EXAMPLE.COM",
                             NormalizedUserName = "HENRY.RODRIGUEZ",
-                            PasswordHash = "AQAAAAIAAYagAAAAEH8sbJteFq1Hi1FQXrT3hxCgL/KSH8ocoVWc+x6RJRpm06yTebEPI0OgA9XpW3Aenw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAECGLy2wALqwzZFlhcZhCZyliTVW3GGNG9Z5Z8d0VM049lsbyoVcY7RVIi9Y5Pzvh/w==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "da8466e2-821e-4f13-877e-96d90a2a9cdd",
+                            SecurityStamp = "1f23d879-c735-40a3-9059-dec34615b6f8",
                             TwoFactorEnabled = false,
                             UserName = "henry.rodriguez",
                             Birthdate = new DateTime(1987, 8, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -977,17 +977,17 @@ namespace MedicDomusLK.Migrations
                         },
                         new
                         {
-                            Id = "04901d21-9108-446b-a62e-b129718175e9",
+                            Id = "47162477-738b-44a6-b750-501c954224c5",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "47fa3050-1a54-441b-b227-7588c290ff86",
+                            ConcurrencyStamp = "11745ce8-1894-4884-b48a-24395cfd4fe2",
                             Email = "isabella.lee@example.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ISABELLA.LEE@EXAMPLE.COM",
                             NormalizedUserName = "ISABELLA.LEE",
-                            PasswordHash = "AQAAAAIAAYagAAAAEHvUU3VfnSeXq0raVOPrhW07DfS9enO848C6FXfd7E7wRPy7GZQUevYFyD8kStanmw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEKiq0IRFzbWQyOzD+KBfBhwplJ/8earqF1Ksr9YlItzmDWlK+gJ0PNiYHaXCH17MaA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "7431a4c0-6c37-44ce-adda-acc0289ad788",
+                            SecurityStamp = "0e1ed36d-379d-40dc-afe3-4c22121a0461",
                             TwoFactorEnabled = false,
                             UserName = "isabella.lee",
                             Birthdate = new DateTime(1996, 9, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -999,17 +999,17 @@ namespace MedicDomusLK.Migrations
                         },
                         new
                         {
-                            Id = "948d4c9e-4187-4127-9423-a4294f51d9f6",
+                            Id = "c7e30c8b-c0a8-4621-a9b3-0f7145051ec6",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1f6aa613-de60-42c4-a553-723d1a5be958",
+                            ConcurrencyStamp = "11685ec1-29af-47c6-b396-df8e4514ec94",
                             Email = "jack.hernandez@example.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "JACK.HERNANDEZ@EXAMPLE.COM",
                             NormalizedUserName = "JACK.HERNANDEZ",
-                            PasswordHash = "AQAAAAIAAYagAAAAEOH6CvB1aMGBdffI277Eda5p6d+lK2tnPAap+eaCYKdHxLMQry1uPFRKWJb6TjmTIQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEFrYIrSdbTqdzzXz989uuWayC40XEqBj4nLGwvAtzF0rDPoXlbLFyWN0zQLpA5rozA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "9a75731a-cd90-405a-98e3-61209d9eedec",
+                            SecurityStamp = "4953da17-950c-41bd-8bd3-7eb7a31e41fc",
                             TwoFactorEnabled = false,
                             UserName = "jack.hernandez",
                             Birthdate = new DateTime(1994, 4, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1021,7 +1021,7 @@ namespace MedicDomusLK.Migrations
                         });
                 });
 
-            modelBuilder.Entity("MedicDomusLK.Data.Models.DoctorInfoPage", b =>
+            modelBuilder.Entity("MedicDomusLK.Data.Models.DoctorInfo", b =>
                 {
                     b.HasOne("MedicDomusLK.Data.Models.ApplicationUser", "Doctor")
                         .WithMany()

@@ -1,6 +1,5 @@
 ﻿using Itenso.TimePeriod;
 using MedicDomusLK.Data.Models;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MedicDomusLK.ViewModels
 {
