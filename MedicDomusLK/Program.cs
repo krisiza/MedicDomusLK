@@ -49,11 +49,13 @@ namespace MedicDomusLK
             builder.Services.AddScoped<IRepository<ApplicationUser, string>, BaseRepository<ApplicationUser, string>>();
             builder.Services.AddScoped<IRepository<Town, int>, BaseRepository<Town, int>>();
             builder.Services.AddScoped<IRepository<Service, int>, BaseRepository<Service, int>>();
+            builder.Services.AddScoped<IRepository<DoctorInfo, int>, BaseRepository<DoctorInfo, int>>();
             builder.Services.AddScoped<IRepository<DoctorPatientService, int>, BaseRepository<DoctorPatientService, int>>();
             builder.Services.AddScoped<IApplicationUserService, ApplicationUserService>();
             builder.Services.AddScoped<IServiceService, ServiceService>();
             builder.Services.AddScoped<ITownService, TownService>();
             builder.Services.AddScoped<IDoctorPatientServiceService, DoctorPatientServiceService>();
+            builder.Services.AddScoped<IDoctorInfoService, DoctorInfoService>();
 
             var app = builder.Build();
 

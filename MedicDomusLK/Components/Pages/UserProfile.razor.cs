@@ -1,5 +1,4 @@
 ﻿using MedicDomusLK.Data.Models;
-using MedicDomusLK.Migrations;
 using MedicDomusLK.Services.Contracts;
 using MedicDomusLK.ViewModels;
 using Microsoft.AspNetCore.Components;

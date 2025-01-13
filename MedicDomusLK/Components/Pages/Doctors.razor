@@ -5,19 +5,19 @@
 <link rel="stylesheet" href="Styles/DoctorPageStyle.css">
 <div class="class-container">
     <div class="card-container">
-        @foreach (var doctor in doctors)
+        @foreach (var entity in entities)
         {
             <div class="card">
                 <div class="img-bx">
-                    <img src="@doctor.ImageUrl" alt="@doctor.Name" />
+                    <img src="@entity.Img" alt="@entity.Doctor.Firstname" />
                 </div>
                 <div class="content">
                     <div class="detail">
-                        <h2>@doctor.Name <br /><span>@doctor.Specialty</span></h2>
-                        <p>@doctor.Description</p>
-                        <ul class="sci">
+                        <h2>@entity.Doctor.Lastname <br /><span>@entity.Doctor.Firstname</span></h2>
+                        <p>@entity.Sector</p>
+                        <ul style="padding:0;" class="sci">
                             <li>
-                                <a href="@doctor.RefPage">
+                                <a href="/doctorinfo/@entity.Id">
                                     <svg style="display:block; width:0.8em;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M96 32l0 32L48 64C21.5 64 0 85.5 0 112l0 48 448 0 0-48c0-26.5-21.5-48-48-48l-48 0 0-32c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 32L160 64l0-32c0-17.7-14.3-32-32-32S96 14.3 96 32zM448 192L0 192 0 464c0 26.5 21.5 48 48 48l352 0c26.5 0 48-21.5 48-48l0-272zM224 248c13.3 0 24 10.7 24 24l0 56 56 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-56 0 0 56c0 13.3-10.7 24-24 24s-24-10.7-24-24l0-56-56 0c-13.3 0-24-10.7-24-24s10.7-24 24-24l56 0 0-56c0-13.3 10.7-24 24-24z" /></svg>
                                  </a>
                             </li>

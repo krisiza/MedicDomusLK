@@ -1,6 +1,8 @@
-﻿using MedicDomusLK.Data.Models;
+﻿using Itenso.TimePeriod;
+using MedicDomusLK.Data.Models;
 using MedicDomusLK.Repositories.Contracts;
 using MedicDomusLK.Services.Contracts;
+using MedicDomusLK.ViewModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace MedicDomusLK.Services
@@ -14,10 +16,36 @@ namespace MedicDomusLK.Services
             this.dpsRepository = dpsRepository;
         }
 
-        public Task<bool> IsHourFree(DateTime start, string doctorId)
+        public async Task<bool> IsHourFreeAsync(TimeRange timeRange, string doctorId)
         {
-          return dpsRepository.GetAllAttached()
-                .AllAsync(dps => dps.DoctorId == doctorId && dps.DateStart == start);
+          var listentites = await dpsRepository.GetAllAttached()
+                .ToListAsync();
+
+            foreach (var item in listentites)
+            {
+                TimeRange entityRange = new TimeRange(item.DateStart, item.DateEnd);
+
+                if (entityRange.HasInside(timeRange))
+                {
+                    return false;
+                }
+            }
+            
+            return true;    
+        }
+
+        public async Task AddDpsEntityAsync(DoctorPatientServiceViewModel model, int serviceId)
+        {
+            var entity = new DoctorPatientService()
+            {
+                DoctorId = model.Doctor.Id,
+                PatientId = model.Patient.Id,
+                ServiceId = serviceId,
+                DateStart = model.DateStart,
+                DateEnd = model.DateEnd,
+            };
+
+           await dpsRepository.AddAsync(entity);
         }
     }
 }

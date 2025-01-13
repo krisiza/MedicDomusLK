@@ -1,12 +1,11 @@
-﻿using MedicDomusLK.Data.Models;
+﻿using Itenso.TimePeriod;
+using MedicDomusLK.Data.Models;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MedicDomusLK.ViewModels
 {
     public class DoctorPatientServiceViewModel
     {
-        public string DoctorId { get; set; } = null!;
-
         public ApplicationUser Doctor { get; set; } = null!;
 
         public ApplicationUser Patient { get; set; } = null!;
@@ -16,5 +15,7 @@ namespace MedicDomusLK.ViewModels
         public DateTime DateStart { get; set; }
 
         public DateTime DateEnd { get; set; }
+
+        public TimeRange TimeRange { get; set; } = new TimeRange();
     }
 }
