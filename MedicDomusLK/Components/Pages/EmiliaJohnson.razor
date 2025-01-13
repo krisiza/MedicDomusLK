@@ -1,6 +1,8 @@
 ﻿@page "/emiliajohnson"
 @using MedicDomusLK.Data.Models
 
+@rendermode InteractiveServer
+
 <link rel="stylesheet" href="Styles/EmiliaRoyStyle.css">
 
 <section id="stark">
@@ -15,19 +17,18 @@
                 <h2>Erfahrung: 5 Jahre</h2>
                 <p>
                     Dr. Johnsonoy ist spezialisiert auf die Behandlung von Kindern und sorgt für deren gesundes Wachstum und Entwicklung. Sie ist bekannt für ihre einfühlsame Betreuung und ihre Fähigkeit, eine vertrauensvolle Verbindung zu jungen Patienten und ihren Familien aufzubauen. Ihr Schwerpunkt liegt auf der Prävention von Krankheiten sowie der Diagnose und Behandlung von kindlichen Gesundheitsproblemen, um eine optimale Entwicklung zu fördern. Dr. Roy setzt sich dafür ein, dass jedes Kind die beste medizinische Versorgung erhält, mit besonderem Augenmerk auf deren emotionales Wohlbefinden während der Behandlung. Sie arbeitet eng mit den Eltern zusammen, um individuelle Gesundheitspläne zu erstellen, die auf die Bedürfnisse jedes einzelnen Kindes abgestimmt sind.
-                </p>
-                <img src="https://i.pinimg.com/474x/a9/29/33/a929337a256b2cae37e2b95ecdb1a6f4.jpg">
+                </p>              
                 <InputDate Type="InputDateType.DateTimeLocal" @bind-Value="doctorPatientService.DateStart" style="margin-bottom:1em;" id="startDate" max="@DateTime.Now.ToString()" min="2023.01.01" class="form-control" />
-                @if (services != null)
+                @if (services != null && doctorPatientService.Service != null)
                 {
-                    <InputSelect @bind-Value="doctorPatientService.Service" class="form-control">
+                    <InputSelect @bind-Value="doctorPatientService.Service.Name" class="form-control">
                         @foreach (Service s in services)
                         {
-                            <option value="@s.Id">@s.Name - @s.Price€</option>
+                            <option value="@doctorPatientService.Service.Name">@s.Name - @s.Price€</option>
                         }
                     </InputSelect>
                 }
-                <button type="submit" @onclick="ButtonClicked" class="appointment-button">Termin vereinbaren</button>
+                <button @onclick="HandleClick" class="appointment-button">Termin vereinbaren</button>
             </div>
         </div>
     </div>
