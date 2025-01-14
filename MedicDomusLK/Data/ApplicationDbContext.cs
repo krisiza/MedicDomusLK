@@ -1,3 +1,4 @@
+using MedicDomusLK.Components.Account.Pages.Manage;
 using MedicDomusLK.Data.Models;
 using MedicDomusLK.Data.Models.Enums;
 using Microsoft.AspNetCore.Identity;
@@ -6,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MedicDomusLK.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
@@ -92,7 +93,7 @@ namespace MedicDomusLK.Data
                 new Service { Id = 12, Name = "Schlafdiagnostik ", Price = 50.00M }
             );
 
-            //Seed User-Doctor and Doctor-Rolle
+            // Seed Roles
             var doctorRoleId = Guid.NewGuid().ToString();
             modelBuilder.Entity<IdentityRole>().HasData(
                 new IdentityRole
@@ -103,84 +104,104 @@ namespace MedicDomusLK.Data
                 }
             );
 
+            // Seed Users
             var passwordHasher = new PasswordHasher<ApplicationUser>();
             var users = new List<ApplicationUser>
-            {
-                new ApplicationUser
-                {
-                    Id = Guid.NewGuid().ToString(),
-                    UserName = "doctor1@example.com",
-                    NormalizedUserName = "DOCTOR1@EXAMPLE.COM",
-                    Email = "doctor1@example.com",
-                    NormalizedEmail = "DOCTOR1@EXAMPLE.COM",
-                    EmailConfirmed = true,
-                    Firstname = "John",
-                    Lastname = "Harris",
-                    Birthdate = new DateTime(1980, 1, 1),
-                    Street = "123 Elm Street",
-                    TownId = 1,
-                    PasswordHash = passwordHasher.HashPassword(null, "Password123!")
-                },
-                new ApplicationUser
-                {
-                    Id = Guid.NewGuid().ToString(),
-                    UserName = "doctor2@example.com",
-                    NormalizedUserName = "DOCTOR2@EXAMPLE.COM",
-                    Email = "doctor2@example.com",
-                    NormalizedEmail = "DOCTOR2@EXAMPLE.COM",
-                    EmailConfirmed = true,
-                    Firstname = "Jane",
-                    Lastname = "Smith",
-                    Birthdate = new DateTime(1985, 2, 15),
-                    Street = "456 Oak Avenue",
-                    TownId = 2,
-                    PasswordHash = passwordHasher.HashPassword(null, "Password123!")
-                },
-                new ApplicationUser
-                {
-                    Id = Guid.NewGuid().ToString(),
-                    UserName = "doctor3@example.com",
-                    NormalizedUserName = "DOCTOR3@EXAMPLE.COM",
-                    Email = "doctor3@example.com",
-                    NormalizedEmail = "DOCTOR3@EXAMPLE.COM",
-                    EmailConfirmed = true,
-                    Firstname = "Emily",
-                    Lastname = "Johnson",
-                    Birthdate = new DateTime(1990, 3, 30),
-                    Street = "789 Pine Lane",
-                    TownId = 3,
-                    PasswordHash = passwordHasher.HashPassword(null, "Password123!")
-                },
-                new ApplicationUser
-                {
-                    Id = Guid.NewGuid().ToString(),
-                    UserName = "doctor4@example.com",
-                    NormalizedUserName = "DOCTOR4@EXAMPLE.COM",
-                    Email = "doctor4@example.com",
-                    NormalizedEmail = "DOCTOR4@EXAMPLE.COM",
-                    EmailConfirmed = true,
-                    Firstname = "Michael",
-                    Lastname = "Garcia",
-                    Birthdate = new DateTime(1975, 4, 10),
-                    Street = "321 Maple Court",
-                    TownId = 4,
-                    PasswordHash = passwordHasher.HashPassword(null, "Password123!")
-                },
-            };
+    {
+        new ApplicationUser
+        {
+            Id = Guid.NewGuid().ToString(),
+            UserName = "doctor1@example.com",
+            NormalizedUserName = "DOCTOR1@EXAMPLE.COM",
+            Email = "doctor1@example.com",
+            NormalizedEmail = "DOCTOR1@EXAMPLE.COM",
+            EmailConfirmed = true,
+            Firstname = "John",
+            Lastname = "Harris",
+            Birthdate = new DateTime(1980, 1, 1),
+            Street = "123 Elm Street",
+            TownId = 1,
+            PasswordHash = passwordHasher.HashPassword(null, "Password123!")
+        },
+        new ApplicationUser
+        {
+            Id = Guid.NewGuid().ToString(),
+            UserName = "doctor2@example.com",
+            NormalizedUserName = "DOCTOR2@EXAMPLE.COM",
+            Email = "doctor2@example.com",
+            NormalizedEmail = "DOCTOR2@EXAMPLE.COM",
+            EmailConfirmed = true,
+            Firstname = "Jane",
+            Lastname = "Smith",
+            Birthdate = new DateTime(1985, 2, 15),
+            Street = "456 Oak Avenue",
+            TownId = 2,
+            PasswordHash = passwordHasher.HashPassword(null, "Password123!")
+        },
+        new ApplicationUser
+        {
+            Id = Guid.NewGuid().ToString(),
+            UserName = "doctor3@example.com",
+            NormalizedUserName = "DOCTOR3@EXAMPLE.COM",
+            Email = "doctor3@example.com",
+            NormalizedEmail = "DOCTOR3@EXAMPLE.COM",
+            EmailConfirmed = true,
+            Firstname = "Emily",
+            Lastname = "Johnson",
+            Birthdate = new DateTime(1990, 3, 30),
+            Street = "789 Pine Lane",
+            TownId = 3,
+            PasswordHash = passwordHasher.HashPassword(null, "Password123!")
+        },
+        new ApplicationUser
+        {
+            Id = Guid.NewGuid().ToString(),
+            UserName = "doctor4@example.com",
+            NormalizedUserName = "DOCTOR4@EXAMPLE.COM",
+            Email = "doctor4@example.com",
+            NormalizedEmail = "DOCTOR4@EXAMPLE.COM",
+            EmailConfirmed = true,
+            Firstname = "Michael",
+            Lastname = "Garcia",
+            Birthdate = new DateTime(1975, 4, 10),
+            Street = "321 Maple Court",
+            TownId = 4,
+            PasswordHash = passwordHasher.HashPassword(null, "Password123!")
+        }
+    };
 
             modelBuilder.Entity<ApplicationUser>().HasData(users);
 
-            var userRoles = users.Select(user => new IdentityUserRole<string>
-            {
-                UserId = user.Id,
-                RoleId = doctorRoleId
-            }).ToList();
+            // Seed User Roles (assign the Doctor role to users)
+            modelBuilder.Entity<IdentityUserRole<string>>().HasData(
+                new IdentityUserRole<string>
+                {
+                    UserId = users[0].Id,  
+                    RoleId = doctorRoleId   
+                },
+                new IdentityUserRole<string>
+                {
+                    UserId = users[1].Id,  
+                    RoleId = doctorRoleId   
+                },
+                new IdentityUserRole<string>
+                {
+                    UserId = users[2].Id,  // doctor3@example.com
+                    RoleId = doctorRoleId   // Doctor role
+                },
+                new IdentityUserRole<string>
+                {
+                    UserId = users[3].Id,  // doctor4@example.com
+                    RoleId = doctorRoleId   // Doctor role
+                }
+            );
+        
 
-            modelBuilder.Entity<IdentityUserRole<string>>().HasData(userRoles);
 
-            //Seed DoctorInfoPage
 
-            var doctorInfos = new List<DoctorInfo>
+
+        //Seed DoctorInfoPage
+        var doctorInfos = new List<DoctorInfo>
             {
                 new DoctorInfo
                 {
@@ -224,10 +245,10 @@ namespace MedicDomusLK.Data
                 }
             };
 
-            modelBuilder.Entity<DoctorInfo>().HasData(doctorInfos);
+        modelBuilder.Entity<DoctorInfo>().HasData(doctorInfos);
 
-            //Seed User-Patient
-            var patients = new List<ApplicationUser>()
+        //Seed User-Patient
+        var patients = new List<ApplicationUser>()
             { new ApplicationUser
             {
                 Id = Guid.NewGuid().ToString(),
@@ -380,10 +401,10 @@ namespace MedicDomusLK.Data
                     PasswordHash = passwordHasher.HashPassword(null, "Password123!")
                 }
             };
-            modelBuilder.Entity<ApplicationUser>().HasData(patients);
+        modelBuilder.Entity<ApplicationUser>().HasData(patients);
 
-            //Seed DoctorPatientService
-            var doctorPatientServices = new List<DoctorPatientService>
+        //Seed DoctorPatientService
+        var doctorPatientServices = new List<DoctorPatientService>
             {
                 new DoctorPatientService
                 {
@@ -451,8 +472,8 @@ namespace MedicDomusLK.Data
                 },
             };
 
-            modelBuilder.Entity<DoctorPatientService>().HasData(doctorPatientServices);
-        }
+        modelBuilder.Entity<DoctorPatientService>().HasData(doctorPatientServices);
     }
+}
 }
 

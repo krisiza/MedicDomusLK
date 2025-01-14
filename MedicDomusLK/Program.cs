@@ -9,6 +9,7 @@ using MedicDomusLK.Services.Contracts;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace MedicDomusLK
 {
@@ -27,35 +28,17 @@ namespace MedicDomusLK
             builder.Services.AddScoped<IdentityRedirectManager>();
             builder.Services.AddScoped<AuthenticationStateProvider, IdentityRevalidatingAuthenticationStateProvider>();
 
-            builder.Services.AddAuthentication(options =>
-                {
-                    options.DefaultScheme = IdentityConstants.ApplicationScheme;
-                    options.DefaultSignInScheme = IdentityConstants.ExternalScheme;
-                })
-                .AddIdentityCookies();
+            // Configure Identity and Authentication
+            ConfigureIdentity(builder.Services);
 
-            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-            builder.Services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(connectionString));
-            builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+            // Configure the database context
+            ConfigureDatabase(builder.Services, builder.Configuration);
 
+            // Register repositories
+            RegisterRepositories(builder.Services);
 
-            builder.Services.AddIdentityCore<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddSignInManager()
-                .AddDefaultTokenProviders();
-
-            builder.Services.AddSingleton<IEmailSender<ApplicationUser>, IdentityNoOpEmailSender>();
-            builder.Services.AddScoped<IRepository<ApplicationUser, string>, BaseRepository<ApplicationUser, string>>();
-            builder.Services.AddScoped<IRepository<Town, int>, BaseRepository<Town, int>>();
-            builder.Services.AddScoped<IRepository<Service, int>, BaseRepository<Service, int>>();
-            builder.Services.AddScoped<IRepository<DoctorInfo, int>, BaseRepository<DoctorInfo, int>>();
-            builder.Services.AddScoped<IRepository<DoctorPatientService, int>, BaseRepository<DoctorPatientService, int>>();
-            builder.Services.AddScoped<IApplicationUserService, ApplicationUserService>();
-            builder.Services.AddScoped<IServiceService, ServiceService>();
-            builder.Services.AddScoped<ITownService, TownService>();
-            builder.Services.AddScoped<IDoctorPatientServiceService, DoctorPatientServiceService>();
-            builder.Services.AddScoped<IDoctorInfoService, DoctorInfoService>();
+            // Register application services
+            RegisterApplicationServices(builder.Services);
 
             var app = builder.Build();
 
@@ -67,7 +50,6 @@ namespace MedicDomusLK
             else
             {
                 app.UseExceptionHandler("/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 
@@ -83,6 +65,58 @@ namespace MedicDomusLK
             app.MapAdditionalIdentityEndpoints();
 
             app.Run();
+        }
+
+        // Configure Identity
+        private static void ConfigureIdentity(IServiceCollection services)
+        {
+            services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+            {
+                options.SignIn.RequireConfirmedAccount = true;
+            })
+            .AddEntityFrameworkStores<ApplicationDbContext>()
+            .AddSignInManager()
+            .AddDefaultTokenProviders();
+
+            // Configure the Role Claim Type for Identity
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.ClaimsIdentity.RoleClaimType = ClaimTypes.Role;
+            });
+
+            // No need to add explicit authentication here, Identity will handle that
+        }
+
+        // Configure Database
+        private static void ConfigureDatabase(IServiceCollection services, IConfiguration configuration)
+        {
+            var connectionString = configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(connectionString));
+            services.AddDatabaseDeveloperPageExceptionFilter();
+        }
+
+        // Register Repositories
+        private static void RegisterRepositories(IServiceCollection services)
+        {
+            services.AddScoped<IRepository<ApplicationUser, string>, BaseRepository<ApplicationUser, string>>();
+            services.AddScoped<IRepository<Town, int>, BaseRepository<Town, int>>();
+            services.AddScoped<IRepository<Service, int>, BaseRepository<Service, int>>();
+            services.AddScoped<IRepository<DoctorInfo, int>, BaseRepository<DoctorInfo, int>>();
+            services.AddScoped<IRepository<DoctorPatientService, (string, string, int, DateTime)>, BaseRepository<DoctorPatientService, (string, string, int, DateTime)>>();
+        }
+
+        // Register Application Services
+        private static void RegisterApplicationServices(IServiceCollection services)
+        {
+            services.AddScoped<IApplicationUserService, ApplicationUserService>();
+            services.AddScoped<IServiceService, ServiceService>();
+            services.AddScoped<ITownService, TownService>();
+            services.AddScoped<IDoctorPatientServiceService, DoctorPatientServiceService>();
+            services.AddScoped<IDoctorInfoService, DoctorInfoService>();
+
+            // Register the EmailSender
+            services.AddSingleton<IEmailSender<ApplicationUser>, IdentityNoOpEmailSender>();
         }
     }
 }

@@ -4,11 +4,9 @@ namespace MedicDomusLK.ViewModels
 {
     public class AppontmentViewModel
     {
-        public int Id { get; set; }
-
         public ApplicationUser Doctor { get; set; } = null!;
 
-        public string Service { get; set; } = null!;
+        public Service Service { get; set; } = null!;
 
         public DateTime DateStart { get; set; }
 

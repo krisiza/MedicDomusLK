@@ -1,5 +1,5 @@
 ﻿:root {
-    --surface-color: #fff;
+    --surface-color: #f2e4e1;
     --curve: 40;
 }
 
@@ -9,13 +9,13 @@
 
 body {
     font-family: 'Noto Sans JP', sans-serif;
-    background-color: #d8e2f2;
+    background-color: #fff;
 }
 
 .cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 1.5rem;
     margin: 4rem 5vw;
     padding: 0;
     list-style-type: none;
@@ -100,12 +100,12 @@ body {
     margin: 1em 0;
     font-family: "MockFlowFont";
     font-size: .8em;
-    color: #D7BDCA;
+    color: #f7816f;
 }
 
 .card__status {
     font-size: .8em;
-    color: #D7BDCA;
+    color: #f7816f;
 }
 
 .card__description {
@@ -117,4 +117,9 @@ body {
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;
     overflow: hidden;
+}
+
+.p-card {
+    font-size:1.2em;
+    color:red;
 }

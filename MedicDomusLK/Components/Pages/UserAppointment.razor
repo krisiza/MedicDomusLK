@@ -2,23 +2,30 @@
 
 <link rel="stylesheet" href="Styles/AppointmentCardStylecss.css">
 <ul class="cards">
-   
-    <li>
-        <a href="" class="card">
-            <img src="https://i.imgur.com/oYiTqum.jpg" class="card__image" alt="" />
-            <div class="card__overlay">
-                <div class="card__header">
-                    <svg class="card__arc" xmlns="http://www.w3.org/2000/svg"><path /></svg>
-                    <img class="card__thumb" src="https://i.imgur.com/7D7I6dI.png" alt="" />
-                    <div class="card__header-text">
-                        <h3 class="card__title">Jessica Parker</h3>
-                        <span class="card__tagline">Lorem ipsum dolor sit amet consectetur</span>
-                        <span class="card__status">1 hour ago</span>
+
+    @if (appontments != null)
+    {
+        foreach (var appointment in appontments)
+        {
+            <li>
+                <a href="/deleteAppointment?doctorId=@appointment.Doctor.Id&serviceId=@appointment.Service.Id&userId=@UserId&dateStart=@appointment.DateStart" class="card">
+                    <img src="/logo-id.jpg" class="card__image" alt="" />
+                    <div class="card__overlay">
+                        <div class="card__header">
+                            <svg class="card__arc" xmlns="http://www.w3.org/2000/svg"><path /></svg>
+                            <img class="card__thumb" src="@appointment.Img" alt="" />
+                            <div class="card__header-text">
+                                <h3 class="card__title">@appointment.DateStart</h3>
+                                <span class="card__tagline">@appointment.Service.Name - @appointment.Service.Price€</span>
+                                <span class="card__status">@appointment.Doctor.Firstname @appointment.Doctor.Lastname</span>
+                                <span class="card__status">- @appointment.Sector</span>
+                            </div>
+                        </div>
+                        <p class="card__description p-card">Termin absagen</p>
                     </div>
-                </div>
-                <p class="card__description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores, blanditiis?</p>
-            </div>
-        </a>
-    </li>
-   
+                </a>
+            </li>
+        }
+    }
+
 </ul>

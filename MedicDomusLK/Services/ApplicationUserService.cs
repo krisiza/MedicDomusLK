@@ -2,6 +2,7 @@
 using MedicDomusLK.Repositories.Contracts;
 using MedicDomusLK.Services.Contracts;
 using MedicDomusLK.ViewModels;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace MedicDomusLK.Services
@@ -9,11 +10,13 @@ namespace MedicDomusLK.Services
     public class ApplicationUserService : IApplicationUserService
     {
         private readonly IRepository<ApplicationUser, string> userRepository;
+        private readonly UserManager<ApplicationUser> userManager;
 
-
-        public ApplicationUserService(IRepository<ApplicationUser, string> userRepository)
+        public ApplicationUserService(IRepository<ApplicationUser, string> userRepository,
+            UserManager<ApplicationUser> userManager)
         {
             this.userRepository = userRepository;
+            this.userManager = userManager;
         }
 
         public async Task<ApplicationUser?> GetByEmailAsync(string email)
@@ -70,5 +73,25 @@ namespace MedicDomusLK.Services
 
         public IQueryable<ApplicationUser> GetAllAttached()
             => userRepository.GetAllAttached();
+
+        public async Task<List<ApplicationUser>?> GetUsersWithNoRolesAsync()
+        {
+            var users = await GetAllAttached()
+                .Include(u => u.Town)
+                .ToListAsync();
+
+            List<ApplicationUser> result = new List<ApplicationUser>();
+
+            foreach (var user in users)
+            {
+                var roles = await userManager.GetRolesAsync(user);
+
+                if(roles.Count == 0) 
+                    result.Add(user);
+            }
+
+            return result;
+        }
     }
 }
+

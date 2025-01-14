@@ -1,0 +1,77 @@
+﻿@page "/deleteAppointment"
+@rendermode InteractiveServer
+
+<link rel="stylesheet" href="Styles/AppointmentCardStylecss.css">
+
+<style>
+    .main-container-card {
+        width: 73em;
+        margin: 2em auto;
+        padding: 1em 2em;
+        border-radius: 3em;
+        background-color: #b2d0f7;
+        display: flex;
+        gap: 2em;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-question {
+        align-self: center;
+    }
+
+    .card-question > h3{
+        color: #fff;
+    }
+
+    .card-question > h3 > span{
+        color: #3483eb;
+        font-weight:bold;
+    }
+
+    .button-conatiner {
+        width: 20em;
+        margin: 1em auto;
+    }
+
+    .button-conatiner > button {
+        border: none;
+        background-color: #3483eb;
+        padding: 0.6em 2em;
+        border-radius: 3em;
+        color: #fff;
+        font-weight: bold;
+    }
+
+    .button-conatiner > button:hover {
+        background-color: #ffffff;
+         color: #3483eb;
+    }
+</style>
+
+@if (Appontment != null)
+{
+    <div class="main-container-card">
+        <div class="card">
+            <img src="/logo-id.jpg" class="card__image" alt="" />
+            <div class="card__overlay">
+                <div class="card__header">
+                    <svg class="card__arc" xmlns="http://www.w3.org/2000/svg"><path /></svg>
+                    <img class="card__thumb" src="@Appontment.Img" alt="" />
+                    <div class="card__header-text">
+                        <h3 class="card__title">@Appontment.DateStart</h3>
+                        <span class="card__tagline">@Appontment.Service.Name - @Appontment.Service.Price€</span>
+                        <span class="card__status">@Appontment.Doctor.Firstname @Appontment.Doctor.Lastname</span>
+                        <span class="card__status">- </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-question">
+            <h3>Möchten Sie Ihren Termin am <span>@Appontment.DateStart</span> absagen?</h3>
+            <div class="button-conatiner">
+                <button @onclick="YesClicked">Ja</button>
+                <button @onclick="NoClicked">Nein</button>
+            </div>
+        </div>
+    </div>
+}

@@ -5,7 +5,6 @@ namespace MedicDomusLK.Services.Contracts
 {
     public interface IApplicationUserService
     {
-        //Task<List<ApplicationUser>> GetAllDoctorsAsync();
         Task DeleteAsync(string userId);
         Task<UserProfilViewModel?> ShowUserProfileModelAsync(string id);
         Task<bool> UpdateAsync(ApplicationUser item);
@@ -13,5 +12,6 @@ namespace MedicDomusLK.Services.Contracts
         Task<ApplicationUser?> GetByIdAsync(string id);
         Task<ApplicationUser?> GetByEmailAsync(string email);
         IQueryable<ApplicationUser> GetAllAttached();
+        Task<List<ApplicationUser>?> GetUsersWithNoRolesAsync();
     }
 }
