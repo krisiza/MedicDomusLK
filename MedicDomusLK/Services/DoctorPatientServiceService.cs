@@ -84,6 +84,23 @@ namespace MedicDomusLK.Services
             return entites;
         }
 
+        public async Task<List<AppontmentViewModel>> GetAppoinsmentsDoctor(string userId)
+        {
+            var entites = await dpsRepository.GetAllAttached()
+                .Include(d => d.Patient)
+                .Include(d => d.Service)
+                .Where(d => d.DoctorId == userId)
+                .Select(d => new AppontmentViewModel()
+                {
+                    Patient = d.Patient,
+                    Service = d.Service,
+                    DateStart = d.DateStart,
+                })
+                .ToListAsync();
+
+            return entites;
+        }
+
         public async Task<AppontmentViewModel?> FindAppointment(string doctorId, string userId, int serviceId, DateTime date)
         {
             var model = await dpsRepository.GetAllAttached()
@@ -92,6 +109,7 @@ namespace MedicDomusLK.Services
                 .Include (d => d.Service)
                 .Select (d => new AppontmentViewModel()
                 {
+                    Patient = d.Patient,
                     Doctor = d.Doctor,
                     Service = d.Service,
                     DateStart = d.DateStart,

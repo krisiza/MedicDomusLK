@@ -1,8 +1,10 @@
 ﻿using MedicDomusLK.Services.Contracts;
 using MedicDomusLK.ViewModels;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.JSInterop;
+using System.Security.Claims;
 
 namespace MedicDomusLK.Components.Pages
 {
@@ -11,6 +13,7 @@ namespace MedicDomusLK.Components.Pages
         [Inject] private NavigationManager Navigation {  get; set; }
         [Inject] IJSRuntime JsRuntime { get; set; } = null!;
         [Inject] private IDoctorPatientServiceService PatientService { get; set; }
+        [Inject] private AuthenticationStateProvider Provider { get; set; } = null!;
 
         [Parameter] public string DoctorId { get; set; }
         [Parameter] public int ServiceId { get; set; }
@@ -20,8 +23,13 @@ namespace MedicDomusLK.Components.Pages
         [BindProperty]
         public AppontmentViewModel? Appontment { get; set; } = null!;
 
+        private ClaimsPrincipal? User;
+
         protected override async Task OnInitializedAsync()
         {
+            var authState = await Provider.GetAuthenticationStateAsync();
+            User = authState.User;
+
             var uri = Navigation.ToAbsoluteUri(Navigation.Uri);
             var query = System.Web.HttpUtility.ParseQueryString(uri.Query);
 

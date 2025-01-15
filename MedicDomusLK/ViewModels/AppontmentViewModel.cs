@@ -4,7 +4,9 @@ namespace MedicDomusLK.ViewModels
 {
     public class AppontmentViewModel
     {
-        public ApplicationUser Doctor { get; set; } = null!;
+        public ApplicationUser? Doctor { get; set; }
+
+        public ApplicationUser? Patient { get; set; }
 
         public Service Service { get; set; } = null!;
 

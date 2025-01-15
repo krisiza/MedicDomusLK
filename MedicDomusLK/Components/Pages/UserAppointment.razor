@@ -5,26 +5,52 @@
 
     @if (appontments != null)
     {
-        foreach (var appointment in appontments)
+        if (User.IsInRole("Doctor"))
         {
-            <li>
-                <a href="/deleteAppointment?doctorId=@appointment.Doctor.Id&serviceId=@appointment.Service.Id&userId=@UserId&dateStart=@appointment.DateStart" class="card">
-                    <img src="/logo-id.jpg" class="card__image" alt="" />
-                    <div class="card__overlay">
-                        <div class="card__header">
-                            <svg class="card__arc" xmlns="http://www.w3.org/2000/svg"><path /></svg>
-                            <img class="card__thumb" src="@appointment.Img" alt="" />
-                            <div class="card__header-text">
-                                <h3 class="card__title">@appointment.DateStart</h3>
-                                <span class="card__tagline">@appointment.Service.Name - @appointment.Service.Price€</span>
-                                <span class="card__status">@appointment.Doctor.Firstname @appointment.Doctor.Lastname</span>
-                                <span class="card__status">- @appointment.Sector</span>
+            foreach (var appointment in appontments)
+            {
+                <li>
+                    <a href="/deleteAppointment?doctorId=@UserId&serviceId=@appointment.Service.Id&userId=@appointment.Patient.Id&dateStart=@appointment.DateStart" class="card">
+                        <img src="/logo-id.jpg" class="card__image" alt="" />
+                        <div class="card__overlay">
+                            <div class="card__header">
+                                <svg class="card__arc" xmlns="http://www.w3.org/2000/svg"><path /></svg>
+                                <div class="card__header-text">
+                                    <h3 class="card__title">@appointment.DateStart</h3>
+                                    <span class="card__tagline">@appointment.Service.Name - @appointment.Service.Price€</span>
+                                    <span class="card__status">@appointment.Patient.Firstname @appointment.Patient.Lastname</span>
+                                    <span class="card__status">- @appointment.Patient.Birthdate.ToString("dd.MM.yyyy")</span>
+                                </div>
                             </div>
+                            <p class="card__description p-card">Termin absagen</p>
                         </div>
-                        <p class="card__description p-card">Termin absagen</p>
-                    </div>
-                </a>
-            </li>
+                    </a>
+                </li>
+            }
+        }
+        else
+        {
+            foreach (var appointment in appontments)
+            {
+                <li>
+                    <a href="/deleteAppointment?doctorId=@appointment.Doctor.Id&serviceId=@appointment.Service.Id&userId=@UserId&dateStart=@appointment.DateStart" class="card">
+                        <img src="/logo-id.jpg" class="card__image" alt="" />
+                        <div class="card__overlay">
+                            <div class="card__header">
+                                <svg class="card__arc" xmlns="http://www.w3.org/2000/svg"><path /></svg>
+                                <img class="card__thumb" src="@appointment.Img" alt="" />
+                                <div class="card__header-text">
+                                    <h3 class="card__title">@appointment.DateStart</h3>
+                                    <span class="card__tagline">@appointment.Service.Name - @appointment.Service.Price€</span>
+                                    <span class="card__status">@appointment.Doctor.Firstname @appointment.Doctor.Lastname</span>
+                                    <span class="card__status">- @appointment.Sector</span>
+                                </div>
+                            </div>
+                            <p class="card__description p-card">Termin absagen</p>
+                        </div>
+                    </a>
+                </li>
+            }
         }
     }
 

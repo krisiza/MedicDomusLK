@@ -104,6 +104,8 @@ namespace MedicDomusLK
             services.AddScoped<IRepository<Service, int>, BaseRepository<Service, int>>();
             services.AddScoped<IRepository<DoctorInfo, int>, BaseRepository<DoctorInfo, int>>();
             services.AddScoped<IRepository<DoctorPatientService, (string, string, int, DateTime)>, BaseRepository<DoctorPatientService, (string, string, int, DateTime)>>();
+            services.AddScoped<IRepository<Bill, string>, BaseRepository<Bill, string>>();
+            services.AddScoped<IRepository<BillService, (string,int)>,  BaseRepository<BillService, (string,int)>>();
         }
 
         // Register Application Services
@@ -114,6 +116,7 @@ namespace MedicDomusLK
             services.AddScoped<ITownService, TownService>();
             services.AddScoped<IDoctorPatientServiceService, DoctorPatientServiceService>();
             services.AddScoped<IDoctorInfoService, DoctorInfoService>();
+            services.AddScoped<IThisBillService, ThisBillService>();
 
             // Register the EmailSender
             services.AddSingleton<IEmailSender<ApplicationUser>, IdentityNoOpEmailSender>();

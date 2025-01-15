@@ -1,0 +1,63 @@
+﻿@page "/bills"
+@using MedicDomusLK.Data.Models.Enums
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize(Roles = "Doctor")]
+
+@rendermode InteractiveServer
+
+<link rel="stylesheet" href="Styles/TableStyle.css">
+
+<div class="user-table-container">
+
+    @if (Bills != null)
+    {
+        @if (User.IsInRole("Doctor"))
+        {
+            foreach (var bill in Bills)
+            {
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Rechnungsnr.</th>
+                            <th scope="col">Datum</th>
+                            <th scope="col">Arzt</th>
+                            <th scope="col">Patient</th>
+                            <th scope="col">Betrag</th>
+                            <th scope="col">Dienstleistungen</th>
+                            <th scope="col">Bezahlt</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">@bill.Id</th>
+                            <td>@bill.Date</td>
+                            <td>Dr. @bill.Doctor.Firstname @bill.Doctor.Lastname</td>
+                            @if (bill.Patient.Gender == Gender.Male)
+                            {
+                                <td>Herr @bill.Patient.Firstname @bill.Patient.Lastname</td>
+                            }
+                            else if (bill.Patient.Gender == Gender.Female)
+                            {
+                                <td>Frau @bill.Patient.Firstname @bill.Patient.Lastname</td>
+                            }
+                            else
+                            {
+                                <td>@bill.Patient.Firstname @bill.Patient.Lastname</td>
+                            }
+                            <td>@bill.Price</td>
+                            <td>@String.Join(" ", bill.Services.Select(s => s.Name))</td>
+                            <td>
+                                <label>
+                                    Bezahlt:
+                                    <InputCheckbox @bind-Value="bill.Paid" @oninput="() => CheckboxChanged(bill.Id, bill.Paid)"></InputCheckbox>
+                                </label>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            }
+        }
+    }
+
+</div>
+

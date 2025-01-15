@@ -60,8 +60,14 @@
                     <div class="card__header-text">
                         <h3 class="card__title">@Appontment.DateStart</h3>
                         <span class="card__tagline">@Appontment.Service.Name - @Appontment.Service.Price€</span>
-                        <span class="card__status">@Appontment.Doctor.Firstname @Appontment.Doctor.Lastname</span>
-                        <span class="card__status">- </span>
+                        @if (User.IsInRole("Doctor"))
+                        {
+                            <span class="card__status">@Appontment.Patient.Firstname @Appontment.Patient.Lastname</span>
+                        }
+                        else
+                        {                         
+                            <span class="card__status">@Appontment.Doctor.Firstname @Appontment.Doctor.Lastname</span>
+                        }
                     </div>
                 </div>
             </div>

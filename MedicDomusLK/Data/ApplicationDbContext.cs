@@ -26,6 +26,10 @@ namespace MedicDomusLK.Data
 
         public DbSet<DoctorInfo> DoctorInfos { get; set; }
 
+        public DbSet<Bill> Bills { get; set; }
+
+        public DbSet<BillService> BillServices { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -48,6 +52,32 @@ namespace MedicDomusLK.Data
                 .HasOne(dps => dps.Service)
                 .WithMany()
                 .HasForeignKey(dps => dps.ServiceId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<Bill>()
+                .HasOne(b => b.Patient)
+                .WithMany()
+                .HasForeignKey(b => b.PatientId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<Bill>()
+                .HasOne(b => b.Doctor)
+                .WithMany()
+                .HasForeignKey(b => b.DoctorId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<BillService>().HasKey(dps => new { dps.BillId, dps.ServiceId });
+
+            modelBuilder.Entity<BillService>()
+                .HasOne(bs => bs.Service)
+                .WithMany()
+                .HasForeignKey(bs => bs.ServiceId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<BillService>()
+                 .HasOne(bs => bs.Bill)
+                .WithMany()
+                .HasForeignKey(bs => bs.BillId)
                 .OnDelete(DeleteBehavior.NoAction);
 
 
@@ -75,10 +105,10 @@ namespace MedicDomusLK.Data
                new Town { Id = 20, PLZ = "93092", Name = "Barbing" },
                new Town { Id = 21, PLZ = "92699", Name = "Wiesau" },
                new Town { Id = 22, PLZ = "92439", Name = "Bodenwoehr" }
-           );
+            );
 
             //Seed Services
-            modelBuilder.Entity<Service>().HasData(
+            var services = new List<Service>() {
                 new Service { Id = 1, Name = "Allgemeine Untersuchung", Price = 50.00M },
                 new Service { Id = 2, Name = "Kinderuntersuchung", Price = 60.00M },
                 new Service { Id = 3, Name = "Impfung", Price = 30.00M },
@@ -91,7 +121,9 @@ namespace MedicDomusLK.Data
                 new Service { Id = 10, Name = "Hoertest", Price = 30.00M },
                 new Service { Id = 11, Name = "Krebsvorsorgeuntersuchung", Price = 60.00M },
                 new Service { Id = 12, Name = "Schlafdiagnostik ", Price = 50.00M }
-            );
+            };
+
+            modelBuilder.Entity<Service>().HasData(services);
 
             // Seed Roles
             var doctorRoleId = Guid.NewGuid().ToString();
@@ -106,107 +138,80 @@ namespace MedicDomusLK.Data
 
             // Seed Users
             var passwordHasher = new PasswordHasher<ApplicationUser>();
-            var users = new List<ApplicationUser>
-    {
-        new ApplicationUser
-        {
-            Id = Guid.NewGuid().ToString(),
-            UserName = "doctor1@example.com",
-            NormalizedUserName = "DOCTOR1@EXAMPLE.COM",
-            Email = "doctor1@example.com",
-            NormalizedEmail = "DOCTOR1@EXAMPLE.COM",
-            EmailConfirmed = true,
-            Firstname = "John",
-            Lastname = "Harris",
-            Birthdate = new DateTime(1980, 1, 1),
-            Street = "123 Elm Street",
-            TownId = 1,
-            PasswordHash = passwordHasher.HashPassword(null, "Password123!")
-        },
-        new ApplicationUser
-        {
-            Id = Guid.NewGuid().ToString(),
-            UserName = "doctor2@example.com",
-            NormalizedUserName = "DOCTOR2@EXAMPLE.COM",
-            Email = "doctor2@example.com",
-            NormalizedEmail = "DOCTOR2@EXAMPLE.COM",
-            EmailConfirmed = true,
-            Firstname = "Jane",
-            Lastname = "Smith",
-            Birthdate = new DateTime(1985, 2, 15),
-            Street = "456 Oak Avenue",
-            TownId = 2,
-            PasswordHash = passwordHasher.HashPassword(null, "Password123!")
-        },
-        new ApplicationUser
-        {
-            Id = Guid.NewGuid().ToString(),
-            UserName = "doctor3@example.com",
-            NormalizedUserName = "DOCTOR3@EXAMPLE.COM",
-            Email = "doctor3@example.com",
-            NormalizedEmail = "DOCTOR3@EXAMPLE.COM",
-            EmailConfirmed = true,
-            Firstname = "Emily",
-            Lastname = "Johnson",
-            Birthdate = new DateTime(1990, 3, 30),
-            Street = "789 Pine Lane",
-            TownId = 3,
-            PasswordHash = passwordHasher.HashPassword(null, "Password123!")
-        },
-        new ApplicationUser
-        {
-            Id = Guid.NewGuid().ToString(),
-            UserName = "doctor4@example.com",
-            NormalizedUserName = "DOCTOR4@EXAMPLE.COM",
-            Email = "doctor4@example.com",
-            NormalizedEmail = "DOCTOR4@EXAMPLE.COM",
-            EmailConfirmed = true,
-            Firstname = "Michael",
-            Lastname = "Garcia",
-            Birthdate = new DateTime(1975, 4, 10),
-            Street = "321 Maple Court",
-            TownId = 4,
-            PasswordHash = passwordHasher.HashPassword(null, "Password123!")
-        }
-    };
-
-            modelBuilder.Entity<ApplicationUser>().HasData(users);
-
-            // Seed User Roles (assign the Doctor role to users)
-            modelBuilder.Entity<IdentityUserRole<string>>().HasData(
-                new IdentityUserRole<string>
+            var doctors = new List<ApplicationUser>
+            {
+                new ApplicationUser
                 {
-                    UserId = users[0].Id,  
-                    RoleId = doctorRoleId   
+                    Id = Guid.NewGuid().ToString(),
+                    UserName = "doctor1@example.com",
+                    NormalizedUserName = "DOCTOR1@EXAMPLE.COM",
+                    Email = "doctor1@example.com",
+                    NormalizedEmail = "DOCTOR1@EXAMPLE.COM",
+                    EmailConfirmed = true,
+                    Firstname = "John",
+                    Lastname = "Harris",
+                    Birthdate = new DateTime(1980, 1, 1),
+                    Street = "123 Elm Street",
+                    TownId = 1,
+                    PasswordHash = passwordHasher.HashPassword(null, "Password123!")
                 },
-                new IdentityUserRole<string>
+                new ApplicationUser
                 {
-                    UserId = users[1].Id,  
-                    RoleId = doctorRoleId   
+                    Id = Guid.NewGuid().ToString(),
+                    UserName = "doctor2@example.com",
+                    NormalizedUserName = "DOCTOR2@EXAMPLE.COM",
+                    Email = "doctor2@example.com",
+                    NormalizedEmail = "DOCTOR2@EXAMPLE.COM",
+                    EmailConfirmed = true,
+                    Firstname = "Jane",
+                    Lastname = "Smith",
+                    Birthdate = new DateTime(1985, 2, 15),
+                    Street = "456 Oak Avenue",
+                    TownId = 2,
+                    PasswordHash = passwordHasher.HashPassword(null, "Password123!")
                 },
-                new IdentityUserRole<string>
+                new ApplicationUser
                 {
-                    UserId = users[2].Id,  // doctor3@example.com
-                    RoleId = doctorRoleId   // Doctor role
+                    Id = Guid.NewGuid().ToString(),
+                    UserName = "doctor3@example.com",
+                    NormalizedUserName = "DOCTOR3@EXAMPLE.COM",
+                    Email = "doctor3@example.com",
+                    NormalizedEmail = "DOCTOR3@EXAMPLE.COM",
+                    EmailConfirmed = true,
+                    Firstname = "Emily",
+                    Lastname = "Johnson",
+                    Birthdate = new DateTime(1990, 3, 30),
+                    Street = "789 Pine Lane",
+                    TownId = 3,
+                    PasswordHash = passwordHasher.HashPassword(null, "Password123!")
                 },
-                new IdentityUserRole<string>
+                new ApplicationUser
                 {
-                    UserId = users[3].Id,  // doctor4@example.com
-                    RoleId = doctorRoleId   // Doctor role
+                    Id = Guid.NewGuid().ToString(),
+                    UserName = "doctor4@example.com",
+                    NormalizedUserName = "DOCTOR4@EXAMPLE.COM",
+                    Email = "doctor4@example.com",
+                    NormalizedEmail = "DOCTOR4@EXAMPLE.COM",
+                    EmailConfirmed = true,
+                    Firstname = "Michael",
+                    Lastname = "Garcia",
+                    Birthdate = new DateTime(1975, 4, 10),
+                    Street = "321 Maple Court",
+                    TownId = 4,
+                    PasswordHash = passwordHasher.HashPassword(null, "Password123!")
                 }
-            );
-        
+            };
+
+            modelBuilder.Entity<ApplicationUser>().HasData(doctors);
 
 
-
-
-        //Seed DoctorInfoPage
-        var doctorInfos = new List<DoctorInfo>
+            //Seed DoctorInfoPage
+            var doctorInfos = new List<DoctorInfo>
             {
                 new DoctorInfo
                 {
                      Id=1,
-                    DoctorId = users[0].Id,
+                    DoctorId = doctors[0].Id,
                     Description = "Dr. Harris ist spezialisiert auf die Behandlung von Erkrankungen der Knochen, Gelenke und Muskeln und hilft Patienten, sich von Verletzungen und Operationen zu erholen. Mit seiner Expertise in der Orthopädie und Rehabilitation bietet er maßgeschneiderte Behandlungspläne, die sowohl konservative Therapieansätze als auch operative Eingriffe umfassen. Dr. Harris behandelt eine Vielzahl von Erkrankungen wie Arthritis, Bandscheibenvorfälle, Knochenbrüche und Sportverletzungen. Durch moderne diagnostische Verfahren und präzise therapeutische Maßnahmen sorgt er dafür, dass Patienten eine schnelle und vollständige Genesung erfahren. Zusätzlich legt er großen Wert auf die Prävention von orthopädischen Problemen und berät seine Patienten zu ergonomischen Praktiken, Sport und Übungen, die die Muskulatur stärken und Verletzungen vorbeugen. Mit einem empathischen Ansatz begleitet er seine Patienten während des gesamten Heilungsprozesses und stellt sicher, dass sie zu einer besseren Lebensqualität zurückkehren.",
                     Sector = "Orthopäde",
                     ExperienceYear = 20,
@@ -216,7 +221,7 @@ namespace MedicDomusLK.Data
                 new DoctorInfo
                 {
                      Id=2,
-                    DoctorId = users[1].Id,
+                    DoctorId = doctors[1].Id,
                     Description =  "Dr. Smith konzentriert sich auf die Hautpflege und hilft Patienten bei einer Vielzahl von Hauterkrankungen, darunter Akne, Ekzeme und Psoriasis. Mit ihrer langjährigen Erfahrung in der Dermatologie bietet sie sowohl medizinische Behandlungen als auch ästhetische Lösungen an, um das Hautbild ihrer Patienten zu verbessern. Sie verwendet modernste Technologien und Verfahren, um Hautkrankheiten effektiv zu behandeln und das Wohlbefinden ihrer Patienten zu steigern. Dr. Clarke legt großen Wert auf eine individuelle Beratung und maßgeschneiderte Behandlungskonzepte, die den spezifischen Bedürfnissen jedes Patienten gerecht werden. Sie setzt sich zudem für die Prävention von Hautkrebs ein und bietet regelmäßige Hautscreenings zur frühzeitigen Erkennung von Hautveränderungen an. Mit ihrer empathischen und professionellen Art sorgt Dr. Clarke dafür, dass ihre Patienten nicht nur medizinische Hilfe erhalten, sondern sich auch in ihrer Haut wieder wohlfühlen.",
                     Sector = "Dermatologin",
                     ExperienceYear = 9,
@@ -226,7 +231,7 @@ namespace MedicDomusLK.Data
                 new DoctorInfo
                 {
                      Id=3,
-                    DoctorId = users[2].Id,
+                    DoctorId = doctors[2].Id,
                     Description =  "Dr. Johnson ist spezialisiert auf die Behandlung von Kindern und sorgt für deren gesundes Wachstum und Entwicklung. Sie ist bekannt für ihre einfühlsame Betreuung und ihre Fähigkeit, eine vertrauensvolle Verbindung zu jungen Patienten und ihren Familien aufzubauen. Ihr Schwerpunkt liegt auf der Prävention von Krankheiten sowie der Diagnose und Behandlung von kindlichen Gesundheitsproblemen, um eine optimale Entwicklung zu fördern. Dr. Roy setzt sich dafür ein, dass jedes Kind die beste medizinische Versorgung erhält, mit besonderem Augenmerk auf deren emotionales Wohlbefinden während der Behandlung. Sie arbeitet eng mit den Eltern zusammen, um individuelle Gesundheitspläne zu erstellen, die auf die Bedürfnisse jedes einzelnen Kindes abgestimmt sind.",
                     Sector = "Pädiaterin",
                     ExperienceYear = 5,
@@ -236,34 +241,59 @@ namespace MedicDomusLK.Data
                 new DoctorInfo
                 {
                     Id=4,
-                    DoctorId = users[3].Id,
+                    DoctorId = doctors[3].Id,
                     Description =  "Dr. Garcia ist ein führender Kardiologe mit umfassender Erfahrung in der Diagnose und Behandlung von Herzkrankheiten. Er hat sich auf die Behandlung von Herzinsuffizienz, koronaren Herzkrankheiten, Bluthochdruck und anderen kardiovaskulären Erkrankungen spezialisiert. Dr. Smith nutzt modernste diagnostische Verfahren wie EKG, Herzultraschall und Belastungstests, um eine präzise Diagnose zu stellen. Er legt großen Wert auf eine ganzheitliche Betreuung seiner Patienten, indem er individuelle Therapiepläne erstellt, die sowohl medikamentöse Behandlungen als auch Änderungen des Lebensstils umfassen. Darüber hinaus engagiert sich Dr. Smith aktiv in der Prävention von Herzkrankheiten und bietet seinen Patienten wertvolle Informationen zur gesunden Ernährung, regelmäßiger Bewegung und Stressbewältigung. Durch seine Expertise und einfühlsame Art hilft er seinen Patienten, ihre Lebensqualität zu verbessern und ihre Herzgesundheit langfristig zu erhalten.",
                     Sector = "Kardiologe",
                     ExperienceYear = 17,
                     Score = 9.30,
                     Img = "https://media.istockphoto.com/id/177373093/photo/indian-male-doctor.jpg?s=612x612&w=0&k=20&c=5FkfKdCYERkAg65cQtdqeO_D0JMv6vrEdPw3mX1Lkfg="
                 }
-            };
+        };
 
-        modelBuilder.Entity<DoctorInfo>().HasData(doctorInfos);
+            modelBuilder.Entity<DoctorInfo>().HasData(doctorInfos);
 
-        //Seed User-Patient
-        var patients = new List<ApplicationUser>()
-            { new ApplicationUser
-            {
-                Id = Guid.NewGuid().ToString(),
-                Firstname = "Alice",
-                Lastname = "Smith",
-                Birthdate = new DateTime(1990, 1, 1),
-                Gender = Gender.Female,
-                TownId = 1,
-                Street = "Main Street 1",
-                Email = "alice.smith@example.com",
-                NormalizedEmail = "ALICE.SMITH@EXAMPLE.COM",
-                UserName = "alice.smith",
-                NormalizedUserName = "ALICE.SMITH",
-                PasswordHash = passwordHasher.HashPassword(null, "Password123!")
-            },
+            // Seed User Roles (assign the Doctor role to doctors)
+            modelBuilder.Entity<IdentityUserRole<string>>().HasData(
+                new IdentityUserRole<string>
+                {
+                    UserId = doctors[0].Id,
+                    RoleId = doctorRoleId
+                },
+                new IdentityUserRole<string>
+                {
+                    UserId = doctors[1].Id,
+                    RoleId = doctorRoleId
+                },
+                new IdentityUserRole<string>
+                {
+                    UserId = doctors[2].Id,
+                    RoleId = doctorRoleId
+                },
+                new IdentityUserRole<string>
+                {
+                    UserId = doctors[3].Id,
+                    RoleId = doctorRoleId
+                }
+            );
+
+
+            //Seed User-Patient
+            var patients = new List<ApplicationUser>(){
+                new ApplicationUser
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    Firstname = "Alice",
+                    Lastname = "Smith",
+                    Birthdate = new DateTime(1990, 1, 1),
+                    Gender = Gender.Female,
+                    TownId = 1,
+                    Street = "Main Street 1",
+                    Email = "alice.smith@example.com",
+                    NormalizedEmail = "ALICE.SMITH@EXAMPLE.COM",
+                    UserName = "alice.smith",
+                    NormalizedUserName = "ALICE.SMITH",
+                    PasswordHash = passwordHasher.HashPassword(null, "Password123!")
+                },
                 new ApplicationUser
                 {
                     Id = Guid.NewGuid().ToString(),
@@ -401,14 +431,14 @@ namespace MedicDomusLK.Data
                     PasswordHash = passwordHasher.HashPassword(null, "Password123!")
                 }
             };
-        modelBuilder.Entity<ApplicationUser>().HasData(patients);
+            modelBuilder.Entity<ApplicationUser>().HasData(patients);
 
-        //Seed DoctorPatientService
-        var doctorPatientServices = new List<DoctorPatientService>
+            //Seed DoctorPatientService
+            var doctorPatientServices = new List<DoctorPatientService>
             {
                 new DoctorPatientService
                 {
-                    DoctorId = users[0].Id,
+                    DoctorId = doctors[0].Id,
                     PatientId = patients[0].Id,
                     ServiceId = 1,
                     DateStart = new DateTime(2025, 1, 10, 13, 00 , 00),
@@ -416,7 +446,7 @@ namespace MedicDomusLK.Data
                 },
                 new DoctorPatientService
                 {
-                    DoctorId = users[1].Id,
+                    DoctorId = doctors[1].Id,
                     PatientId = patients[1].Id,
                     ServiceId = 2,
                     DateStart = new DateTime(2025, 1, 11, 8, 00 , 00),
@@ -424,7 +454,7 @@ namespace MedicDomusLK.Data
                 },
                 new DoctorPatientService
                 {
-                    DoctorId = users[2].Id,
+                    DoctorId = doctors[2].Id,
                     PatientId = patients[2].Id,
                     ServiceId = 3,
                     DateStart = new DateTime(2025, 1, 12, 10, 00 , 00),
@@ -432,7 +462,7 @@ namespace MedicDomusLK.Data
                 },
                 new DoctorPatientService
                 {
-                    DoctorId = users[3].Id,
+                    DoctorId = doctors[3].Id,
                     PatientId = patients[3].Id,
                     ServiceId = 4,
                     DateStart = new DateTime(2025, 1, 13, 13, 00 , 00),
@@ -440,7 +470,7 @@ namespace MedicDomusLK.Data
                 },
                 new DoctorPatientService
                 {
-                    DoctorId = users[0].Id,
+                    DoctorId = doctors[0].Id,
                     PatientId = patients[5].Id,
                     ServiceId = 1,
                     DateStart = new DateTime(2025, 1, 15, 15, 00, 00),
@@ -448,7 +478,7 @@ namespace MedicDomusLK.Data
                 },
                 new DoctorPatientService
                 {
-                    DoctorId = users[1].Id,
+                    DoctorId = doctors[1].Id,
                     PatientId = patients[6].Id,
                     ServiceId = 2,
                     DateStart = new DateTime(2025, 1, 16, 9, 00, 00),
@@ -456,7 +486,7 @@ namespace MedicDomusLK.Data
                 },
                 new DoctorPatientService
                 {
-                    DoctorId = users[2].Id,
+                    DoctorId = doctors[2].Id,
                     PatientId = patients[7].Id,
                     ServiceId = 3,
                     DateStart = new DateTime(2025, 1, 17, 8, 00, 00),
@@ -464,7 +494,7 @@ namespace MedicDomusLK.Data
                 },
                 new DoctorPatientService
                 {
-                    DoctorId = users[3].Id,
+                    DoctorId = doctors[3].Id,
                     PatientId = patients[8].Id,
                     ServiceId = 4,
                     DateStart = new DateTime(2025, 1, 18, 7, 00, 00),
@@ -472,8 +502,98 @@ namespace MedicDomusLK.Data
                 },
             };
 
-        modelBuilder.Entity<DoctorPatientService>().HasData(doctorPatientServices);
+            modelBuilder.Entity<DoctorPatientService>().HasData(doctorPatientServices);
+
+            // Seed Bills
+            var bills = new List<Bill>()
+            {
+                new Bill
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    Date = new DateTime(2025, 1, 15),
+                    DoctorId = doctors[0].Id,
+                    PatientId = patients[8].Id,
+                    Price = 45.00M,
+                    Paid = false
+                },
+                new Bill
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    Date = new DateTime(2025, 1, 14),
+                    DoctorId = doctors[1].Id,
+                    PatientId = patients[7].Id,
+                    Price = 160.00M,
+                    Paid = true
+                },
+                new Bill
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    Date = new DateTime(2025, 1, 13),
+                    DoctorId = doctors[2].Id,
+                    PatientId = patients[6].Id,
+                    Price = 110.00M,
+                    Paid = false
+                },
+                new Bill
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    Date = new DateTime(2024, 12, 1),
+                    DoctorId = doctors[1].Id,
+                    PatientId = patients[4].Id,
+                    Price = 50.00M,
+                    Paid = true
+                },
+                new Bill
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    Date = new DateTime(2024, 12, 8),
+                    DoctorId = doctors[2].Id,
+                    PatientId = patients[3].Id,
+                    Price = 345.00M,
+                    Paid = true
+                }
+            };
+
+            modelBuilder.Entity<Bill>().HasData(bills);
+
+            modelBuilder.Entity<BillService>().HasData(
+                new BillService
+                {
+                    BillId = bills[0].Id,
+                    ServiceId = services[0].Id,
+                },
+                new BillService
+                {
+                    BillId = bills[1].Id,
+                    ServiceId = services[1].Id,
+                },
+                new BillService
+                {
+                    BillId = bills[2].Id,
+                    ServiceId = services[2].Id
+                },
+                new BillService
+                {
+                    BillId = bills[2].Id,
+                    ServiceId = services[3].Id
+                },
+                new BillService
+                {
+                    BillId = bills[3].Id,
+                    ServiceId = services[4].Id
+                },
+                new BillService
+                {
+                    BillId = bills[4].Id,
+                    ServiceId = services[5].Id
+                },
+                new BillService
+                {
+                    BillId = bills[4].Id,
+                    ServiceId = services[6].Id
+                }
+            );
+        }
     }
-}
 }
 

@@ -2,36 +2,7 @@
 @page "/allPatients"
 @attribute [Authorize(Roles = "Doctor")]
 
-<style>
-    .user-table-container{
-        margin: 5em;
-        border: 2px solid #97bff7;
-        border-radius: 3em;
-        padding: 1em;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        background-color: #97bff7;
-    }
-
-    .user-table-container  > table > thead{
-        background-color: #97bff7;
-    }
-
-    .user-table-container > table > tbody > tr:nth-child(odd){
-        background-color:#fff;
-   }
-
-   .table-a{
-       background-color: transparent;
-       border:none;
-        color: #365785;
-       font-weight:bold;
-       text-decoration:none;
-   }
-
-    .table-a:hover{
-       color: #78aaf0;
-    }
- </style>
+<link rel="stylesheet" href="Styles/TableStyle.css">
 
 @if (Users != null)
 {
@@ -59,8 +30,8 @@
                         <td>@user.Town.PLZ @user.Town.Name</td>
                         <td>@user.Street</td>
                         <td>@user.Email</td>
-                        <td><a href="#" class="table-a">Rechnung</a></td>
-                        <td><a href="#" class="table-a">Termin</a></td>
+                        <td><a href="/bills?patientId=@user.Id" class="table-a">bestehende Rechnungen</a></td>
+                        <td><a href="/createbills?patientId =@user.Id" class="table-a">Rechnung erstellen</a></td>
                     </tr>
                 }
             </tbody>

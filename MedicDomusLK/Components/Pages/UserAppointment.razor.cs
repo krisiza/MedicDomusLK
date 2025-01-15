@@ -15,17 +15,21 @@ namespace MedicDomusLK.Components.Pages
 
         private List<AppontmentViewModel> appontments;
         private string? UserId;
+        private ClaimsPrincipal? User;
         protected override async Task OnInitializedAsync()
         {
             var authState = await Provider.GetAuthenticationStateAsync();
-            var user = authState.User;
+            User = authState.User;
 
-            if (user.Identity != null && user.Identity.IsAuthenticated)
+            if (User.Identity != null && User.Identity.IsAuthenticated)
             {
-                UserId = user.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                UserId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             }
 
-            appontments = await dpsService.GetAppoinsments(UserId);
+            if (User.IsInRole("Doctor"))
+                appontments = await dpsService.GetAppoinsmentsDoctor(UserId);
+            else
+                appontments = await dpsService.GetAppoinsments(UserId);
         }
     }
 }

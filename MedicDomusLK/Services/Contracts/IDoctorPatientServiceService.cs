@@ -9,6 +9,7 @@ namespace MedicDomusLK.Services.Contracts
         Task<bool> IsHourFreeAsync(TimeRange timerange, string doctorId);
         Task AddDpsEntityAsync(DoctorPatientServiceViewModel model, int serviceId);
         Task<List<AppontmentViewModel>> GetAppoinsments(string userId);
+        Task<List<AppontmentViewModel>> GetAppoinsmentsDoctor(string userId);
         Task DeleteAppointment(string doctorId, string userId, int serviceId, DateTime date);
         Task<AppontmentViewModel?> FindAppointment(string doctorId, string userId, int serviceId, DateTime date);
     }
