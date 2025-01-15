@@ -16,6 +16,8 @@
 
         Task AddAsync(TType item);
 
+        Task AddRangeAsync(List<TType> items);
+
         bool Delete(TId id);
 
         Task<bool> DeleteAsync(TId id);

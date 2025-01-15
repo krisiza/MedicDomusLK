@@ -15,5 +15,8 @@ namespace MedicDomusLK.Services
 
         public IQueryable<Service> GetAllAttached()
             => serviceRepository.GetAllAttached();
+
+        public async Task<Service> FindById(int id)
+            => await serviceRepository.GetByIdAsync(id);
     }
 }

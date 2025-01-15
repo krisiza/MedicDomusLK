@@ -39,6 +39,15 @@ namespace MedicDomusLK.Services
             return user;
         }
 
+        public async Task<List<ApplicationUser>> GetAllDoctorsAsync()
+        {
+            var users = await userRepository.GetAllAttached()
+                .Where(u => u.Email.Contains("doctor"))
+                .ToListAsync();
+
+            return users;
+        }
+
         public async Task<bool> UpdateAsync(ApplicationUser item)
             => await userRepository.UpdateAsync(item);
 

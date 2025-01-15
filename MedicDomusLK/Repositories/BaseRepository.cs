@@ -43,6 +43,13 @@ namespace MedicDomusLK.Repositories
             await context.SaveChangesAsync();
         }
 
+        public async Task AddRangeAsync(List<TType> items)
+        {
+            await dbSet.AddRangeAsync(items);
+            await context.SaveChangesAsync();
+        }
+
+
         public bool Delete(TId id)
         {
             TType? entity = GetById(id);

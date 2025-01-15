@@ -1,4 +1,5 @@
-﻿using MedicDomusLK.ViewModels;
+﻿using MedicDomusLK.Data.Models;
+using MedicDomusLK.ViewModels;
 
 namespace MedicDomusLK.Services.Contracts
 {
@@ -6,5 +7,6 @@ namespace MedicDomusLK.Services.Contracts
     {
         Task<List<BillViewModel>> GetAllPatientBillsAsync(string patientId);
         void ChangePaidStatus(string billId, bool isPaid);
+        Task SaveBillAsync(Bill model);
     }
 }

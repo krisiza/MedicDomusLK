@@ -63,5 +63,22 @@ namespace MedicDomusLK.Services
             entity.Paid = isPaid;
             billRepository.Update(entity);
         }
+
+        public async Task SaveBillAsync(Bill model)
+        {
+           await billRepository.AddAsync(model);
+
+            List<BillService> services = new List<BillService>();
+            BillService bs;
+            foreach (var s in model.Services)
+            {
+                bs = new BillService();
+                bs.ServiceId = s.Id;
+                bs.BillId = model.Id;
+                services.Add(bs);
+            }
+
+            await billServiceRepository.AddRangeAsync(services);
+        }
     }
 }

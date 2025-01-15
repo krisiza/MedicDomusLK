@@ -13,5 +13,6 @@ namespace MedicDomusLK.Services.Contracts
         Task<ApplicationUser?> GetByEmailAsync(string email);
         IQueryable<ApplicationUser> GetAllAttached();
         Task<List<ApplicationUser>?> GetUsersWithNoRolesAsync();
+        Task<List<ApplicationUser>> GetAllDoctorsAsync();
     }
 }
