@@ -8,5 +8,6 @@ namespace MedicDomusLK.Services.Contracts
         Task<List<BillViewModel>> GetAllPatientBillsAsync(string patientId);
         void ChangePaidStatus(string billId, bool isPaid);
         Task SaveBillAsync(Bill model);
+        Task<BillViewModel> GetByIdAsyc(string id);
     }
 }

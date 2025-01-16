@@ -4,6 +4,14 @@
 
 <link rel="stylesheet" href="Styles/TableStyle.css">
 
+<style>
+    .download-button{
+        background-color:transparent;
+        border:none;
+        margin-top: 0.5em;
+    }
+</style>
+
 @if (Users != null)
 {
     <div class="user-table-container">
@@ -17,7 +25,7 @@
                     <th scope="col">Strasse</th>
                     <th scope="col">E-Mail</th>
                     <th scope="col">Rechung</th>
-                    <th scope="col">Termin</th>
+                    <th scope="col">Erstellen</th>
                 </tr>
             </thead>
             <tbody>
@@ -31,7 +39,7 @@
                         <td>@user.Street</td>
                         <td>@user.Email</td>
                         <td><a href="/bills?patientId=@user.Id" class="table-a">bestehende Rechnungen</a></td>
-                        <td><a href="/createbill/@user.Id" class="table-a">Rechnung erstellen</a></td>
+                        <td><a href="/createbill/@user.Id" class="table-a">Rechnung erstellen</a></td>                     
                     </tr>
                 }
             </tbody>

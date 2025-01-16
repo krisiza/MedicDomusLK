@@ -17,6 +17,7 @@ namespace MedicDomusLK.Components.Pages
 
         private ClaimsPrincipal? User;
         private string? UserId;
+        private bool isUserAuthenticated;
         protected override async Task OnInitializedAsync()
         {
             var authState = await Provider.GetAuthenticationStateAsync();
@@ -26,6 +27,8 @@ namespace MedicDomusLK.Components.Pages
             {
                 UserId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             }
+
+            isUserAuthenticated = User.Identity.IsAuthenticated;
 
             var uri = Navigation.ToAbsoluteUri(Navigation.Uri);
             var query = System.Web.HttpUtility.ParseQueryString(uri.Query);

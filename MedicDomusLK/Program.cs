@@ -117,6 +117,7 @@ namespace MedicDomusLK
             services.AddScoped<IDoctorPatientServiceService, DoctorPatientServiceService>();
             services.AddScoped<IDoctorInfoService, DoctorInfoService>();
             services.AddScoped<IThisBillService, ThisBillService>();
+            services.AddScoped<IInvoiceService, InvoiceService>();
 
             // Register the EmailSender
             services.AddSingleton<IEmailSender<ApplicationUser>, IdentityNoOpEmailSender>();

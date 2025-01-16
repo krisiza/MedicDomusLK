@@ -1,0 +1,48 @@
+﻿@page "/pdfdownload/{PatientId}/{BillId}"
+@rendermode InteractiveServer
+
+<div class="pdf-download-container">
+    <button class="btn-download" @onclick="DownloadPdf">Download PDF</button>
+</div>
+
+<script>
+    window.saveAsFile = (filename, bytesBase64) => {
+        var link = document.createElement('a');
+        link.href = 'data:application/octet-stream;base64,' + bytesBase64;
+        link.download = filename;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    };
+</script>
+
+<style>
+    .pdf-download-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f4f4f9;
+    }
+
+    .btn-download {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .btn-download:hover {
+        background-color: #0056b3;
+        transform: scale(1.05);
+    }
+
+    .btn-download:active {
+        background-color: #003f7f;
+    }
+</style>
