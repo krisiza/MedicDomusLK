@@ -52,3 +52,28 @@
         <p>Copyright @DateTime.Now.Year MedicDumus. All Rights Reserved</p>
     </footer>
 </div>
+
+<script src="https://cdn.jotfor.ms/s/umd/latest/for-embedded-agent.js"></script>
+<script src="https://cdn.jotfor.ms/s/umd/latest/for-embedded-agent.js"></script>
+<script>
+    window.addEventListener("DOMContentLoaded", function () {
+        window.AgentInitializer.init({
+            rootId: "JotformAgent-01946e9864977f78bcadeb12c6a4050389cb",
+            formID: "01946e9864977f78bcadeb12c6a4050389cb",
+            queryParams: ["skipWelcome=1", "maximizable=1"],
+            domain: "https://www.jotform.com",
+            isInitialOpen: false,
+            isDraggable: false,
+            background: "linear-gradient(180deg, #C8CEED 0%, #C8CEED 100%)",
+            buttonBackgroundColor: "#0a1551",
+            buttonIconColor: "#fff",
+            variant: false,
+            customizations: {
+                greeting: "Yes",
+                greetingMessage: "Hi! How can I assist you?",
+                pulse: "Yes",
+                position: "right"
+            }
+        });
+    });
+</script>
