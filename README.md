@@ -1,72 +1,58 @@
 # MedicDomusLK
 
+**MedicDomusLK** is a web application that enables **patients** to manage medical appointments and billing, while providing **doctors** with tools to organize their services and patients.
 
-MedicDomusLK is a web application that enables patients to create profiles, book appointments with doctors for a variety of services, and download invoices as PDFs. Meanwhile, doctors can manage their own profiles, cancel appointments, and issue invoices.
+---
 
-Features
+## 🧑‍⚕️ What Is MedicDomusLK?
 
-👤 Patient Portal
-Register and manage a personal profile
-Browse available doctors and medical services
-Book appointments with doctors based on service and availability
-Cancel previously scheduled appointments
-View billing history
-Download invoices as PDF
-🩺 Doctor Portal
-Register as a doctor and manage a professional profile (including specialty, experience, description, and profile image)
-View upcoming appointments with patients
-Cancel appointments if needed
-Create and assign invoices to patients
-View patient treatment and billing history
-🧾 Billing System
-Doctors can create and manage invoices for services rendered
-Invoices are associated with specific services and patients
-Patients can view their invoices and download them in PDF format
-Payment status is tracked (Paid / Unpaid)
-Tech Stack
+This platform allows:
 
-ASP.NET Core with Entity Framework Core
-Identity for user authentication and role management
-SQL Server (via EF migrations)
-Razor Pages / Blazor Components (under MedicDomusLK.Components.Account.Pages.Manage namespace)
-Database Models
+### For Patients:
+- Create a personal profile
+- Book appointments with various doctors across different services
+- Cancel scheduled appointments
+- View and download medical bills as PDFs
 
-Key models include:
+### For Doctors:
+- Create and manage their profile (including specialty, experience, photo, etc.)
+- See upcoming appointments
+- Cancel appointments
+- Create and send bills to patients
+- Track payment status
 
-ApplicationUser: Extended Identity user for both patients and doctors
-DoctorInfo: Extended profile details for doctors
-Service: Types of medical services offered
-DoctorPatientService: Appointment relation between doctors and patients
-Bill & BillService: Invoicing system with line-item services
-Seeding (Sample Data)
+---
 
-On database creation, the system seeds:
+## 🏥 Core Features
 
-Doctors and their specialties (Orthopedist, Dermatologist, Pediatrician, Cardiologist)
-Patients with personal details
-Towns (e.g. Regensburg, Cham, Neumarkt)
-Services (e.g. Ultrasound, EKG, Vaccination)
-Appointments and Bills with service breakdown
-Doctor Profile Access
+- Role-based user system (Doctor / Patient)
+- Dynamic service offerings (e.g., Blood Tests, Ultrasound, Vaccinations, etc.)
+- Full appointment lifecycle: creation, cancellation, and tracking
+- Invoice generation by doctors
+- PDF export of bills for patients
+- Pre-seeded towns and medical services for realistic setup
 
-To simulate or test the application as a Doctor, you can log in with one of the seeded accounts:
+---
 
-Username: doctor1@example.com
-Password: Password123!
-Other seeded doctor accounts include:
+## 🗃️ Tech Stack
 
-doctor2@example.com
-doctor3@example.com
-doctor4@example.com
-Each profile comes with realistic experience details, description, and associated services.
+- ASP.NET Core (Razor Pages / Blazor)
+- Entity Framework Core
+- ASP.NET Identity (User and Role management)
+- SQL Server
+- C#
 
-Getting Started
+---
 
-Clone the repository:
-git clone https://github.com/your-username/MedicDomusLK.git
-cd MedicDomusLK
-Update connection string in appsettings.json for your local SQL Server.
-Apply migrations:
-dotnet ef database update
-Run the application:
-dotnet run
+## 📄 Sample Doctor Logins
+
+You can log into one of the pre-seeded doctor profiles:
+
+- **doctor1@example.com**  
+- **doctor2@example.com**  
+- **doctor3@example.com**  
+- **doctor4@example.com**  
+
+All use the same password:
+
+- Password123!
