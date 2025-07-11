@@ -14,7 +14,7 @@ This platform allows:
 - Cancel scheduled appointments
 - View and download medical bills as PDFs
 
-![MedicDomusLK Banner](Assets/homepage.png)
+![MedicDomusLK Banner](Assets/homapage.png)
 ![MedicDomusLK Banner](Assets/login.png)
 ![MedicDomusLK Banner](Assets/doctors.png)
 ![MedicDomusLK Banner](Assets/booking.png)
