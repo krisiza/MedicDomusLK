@@ -14,11 +14,11 @@ This platform allows:
 - Cancel scheduled appointments
 - View and download medical bills as PDFs
 
-![MedicDomusLK Banner](assets/homepage.png)
-![MedicDomusLK Banner](assets/login.png)
-![MedicDomusLK Banner](assets/doctors.png)
-![MedicDomusLK Banner](assets/booking.png)
-![MedicDomusLK Banner](assets/profile.png)
+![MedicDomusLK Banner](Assets/homepage.png)
+![MedicDomusLK Banner](Assets/login.png)
+![MedicDomusLK Banner](Assets/doctors.png)
+![MedicDomusLK Banner](Assets/booking.png)
+![MedicDomusLK Banner](Assets/profile.png)
 
 ### For Doctors:
 - Create and manage their profile (including specialty, experience, photo, etc.)
@@ -27,11 +27,11 @@ This platform allows:
 - Create and send bills to patients
 - Track payment status
 - 
-![MedicDomusLK Banner](assets/all-bookings.png)
-![MedicDomusLK Banner](assets/patients.png)
-![MedicDomusLK Banner](assets/create-bill.png)
-![MedicDomusLK Banner](assets/download-bill.png)
-![MedicDomusLK Banner](assets/bill-pdf.png)
+![MedicDomusLK Banner](Assets/all-bookings.png)
+![MedicDomusLK Banner](Assets/patients.png)
+![MedicDomusLK Banner](Assets/create-bill.png)
+![MedicDomusLK Banner](Assets/download-bill.png)
+![MedicDomusLK Banner](Assets/bill-pdf.png)
 ---
 
 ## 🏥 Core Features
